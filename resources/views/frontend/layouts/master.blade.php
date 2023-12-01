@@ -8,9 +8,6 @@
     <meta content="Free HTML Templates" name="description" />
     <link rel="shortcut icon" type="image/png" href="img/dog.jpg" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon" />
 
@@ -48,6 +45,7 @@
 
 <body>
     
+  @include('sweetalert::alert')
 
 
     @include('frontend.layouts.navbar')

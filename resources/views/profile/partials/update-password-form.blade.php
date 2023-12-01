@@ -1,4 +1,4 @@
-<section>
+{{-- <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Update Password') }}
@@ -45,4 +45,61 @@
             @endif
         </div>
     </form>
-</section>
+</section> --}}
+
+
+<form method="POST" action="{{ route('password.update') }}" enctype="multipart/form-data">
+    @csrf
+    @method('put')
+    <div class="card-body pt-2 mt-1">
+        <div class="row mt-2 gy-4">
+            <div class="col-md-12">
+                <div class="form-floating form-floating-outline mb-3">
+                    <label for="current_password">Current Password</label>
+                    <input type="password" class="form-control" id="current_password" name="current_password"
+                        placeholder="Enter your current password"  />
+                </div>
+                @if ($errors->updatePassword->has('current_password'))
+                <div class="mt-2 text-danger small">
+                    {{ $errors->updatePassword->first('current_password') }}
+                </div>
+            @endif
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-floating form-floating-outline mb-3">
+                    <label for="password">New Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                        placeholder="Enter your New password"  />
+
+                </div>
+                @if ($errors->updatePassword->has('password'))
+                <div class="mt-2 text-danger small">
+                    {{ $errors->updatePassword->first('password') }}
+                </div>
+            @endif
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-floating form-floating-outline mb-3">
+                    <label for="password_confirmation">Confirm Password</label>
+                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                    placeholder="Confirm your password"  />
+                </div>
+                @if ($errors->updatePassword->has('password_confirmation'))
+                <div class="mt-2 text-danger small">
+                    {{ $errors->updatePassword->first('password_confirmation') }}
+                </div>
+            @endif
+            </div>
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="btn  btn-outline-danger">Reset Password</button>
+
+            @if (session('status') === 'password-updated')
+                    <?php
+                    Alert::success('Success', 'Your password has been updated successfully!');
+                    ?>
+                @endif
+        </div>
+</form>

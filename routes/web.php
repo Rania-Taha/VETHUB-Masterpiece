@@ -14,6 +14,9 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\HelloMail;
+
 
 
 
@@ -139,3 +142,7 @@ Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews
 
 
 // Route::get('/search-clinics', [ClinicController::class, 'searchClinics'])->name('search_clinics');
+
+//PAYPAL
+Route::get('paypal/success', [BookingController::class, 'success'])->name('paypal_success');
+Route::get('paypal/cancel',  [BookingController::class, 'cancel'])->name('paypal_cancel');
