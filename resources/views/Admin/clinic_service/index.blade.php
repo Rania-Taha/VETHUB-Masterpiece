@@ -31,7 +31,7 @@
                                     <thead style="text-align: center; vertical-align: middle;">
 
                                         <tr>
-                                            <th>Clinic Id</th>
+                                            <th>Clinic Name</th>
                                             <th>Service</th>
                                             {{-- <th>description</th> --}}
                                             {{-- <th>image</th> --}}

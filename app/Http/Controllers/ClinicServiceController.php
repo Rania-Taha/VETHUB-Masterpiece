@@ -7,6 +7,8 @@ use App\Models\Clinic;
 use App\Traits\ImageUploadTrait;
 use App\Http\Requests\StoreClinic_ServiceRequest;
 use App\Http\Requests\UpdateClinic_ServiceRequest;
+use Illuminate\Support\Facades\Session;
+
 
 class ClinicServiceController extends Controller
 {
@@ -21,8 +23,8 @@ class ClinicServiceController extends Controller
             if ($role == 'admin') {
                 $id = Auth::user()->id;
                 $user = User::find($id);
-                $clinic_service = Clinic_Service::all();
-                return view('Admin.clinic_service.index', compact('clinic_service' ));
+                $clinic_service = Clinic_Service::with('clinic')->get();
+                return view('Admin.clinic_service.index', compact('clinic_service'));
             } elseif ($role == 'provider') {
                 $id = Auth::user()->id;
                 $user = User::find($id);
@@ -63,7 +65,7 @@ class ClinicServiceController extends Controller
         $clinic_service->description = htmlspecialchars($request->description);
         $clinic_service->save();
 
-        // toastr('Created Successfully!', 'success');
+        Session::flash('success', 'Service created successfully!');
         return redirect('clinicService');
 
     }
@@ -123,7 +125,9 @@ class ClinicServiceController extends Controller
             unset($clinic_service['image']);
         }
         Clinic_Service::where(['id' => $id])->update($clinic_service);
-        return redirect('clinicService')->with('flash_message', 'Service Updated!');
+        Session::flash('success', 'Service Updated successfully!');
+
+        return redirect('clinicService');
     }
     /**
      * Remove the specified resource from storage.
@@ -131,6 +135,8 @@ class ClinicServiceController extends Controller
     public function destroy($id)
     {
         Clinic_Service::destroy($id);
-        return redirect('clinicService')->with('flash_message', 'Service deleted!');
+        Session::flash('success', 'Service deleted successfully!');
+
+        return redirect('clinicService');
     }
 }

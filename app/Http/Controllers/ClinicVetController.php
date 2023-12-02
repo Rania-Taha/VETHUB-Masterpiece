@@ -8,6 +8,8 @@ use App\Traits\ImageUploadTrait;
 use App\Http\Requests\StoreClinic_vetRequest;
 use App\Http\Requests\UpdateClinic_vetRequest;
 use Auth;
+use Illuminate\Support\Facades\Session;
+
 
 
 class ClinicVetController extends Controller
@@ -24,8 +26,10 @@ class ClinicVetController extends Controller
             if ($role == 'admin') {
                 $id = Auth::user()->id;
                 $user = User::find($id);
-                $clinic_vet = Clinic_vet::all();
-                return view ('Admin.clinic_vet.index')->with('clinic_vet', $clinic_vet);
+                $clinic_vet = Clinic_vet::with('clinic')->get();
+                // dd($clinic_vet);
+                return view('Admin.clinic_vet.index', compact('clinic_vet'));
+
             } elseif ($role == 'provider') {
                 $id = Auth::user()->id;
                 $user = User::find($id);
@@ -67,8 +71,8 @@ class ClinicVetController extends Controller
         $clinic_vet->save();
         
        
-        
-        // toastr('Created Successfully!', 'success');
+        Session::flash('success', 'Service created successfully!');
+
         return redirect('clinicVet');
     }
 
@@ -121,7 +125,9 @@ class ClinicVetController extends Controller
        
 
         Clinic_vet::where(['id' => $id])->update($clinic_vet);
-        return redirect('clinicVet')->with('flash_message', 'Vet Updated!'); 
+        Session::flash('success', 'Service Updated successfully!');
+
+        return redirect('clinicVet'); 
     }
 
     /**
@@ -130,6 +136,8 @@ class ClinicVetController extends Controller
     public function destroy($id)
     {
         Clinic_vet::destroy($id);
-        return redirect ('clinicVet')->with('flash_message', 'Vet deleted!');
+        Session::flash('success', 'Vet deleted successfully!');
+
+        return redirect ('clinicVet');
     }
 }
