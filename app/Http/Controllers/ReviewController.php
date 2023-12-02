@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Review;
 use App\Models\Schedule;
-
 use App\Models\User;
 use App\Models\Clinic;
 use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
 use Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class ReviewController extends Controller
 {
@@ -22,6 +23,7 @@ class ReviewController extends Controller
         $review = Review::all();
         $user = User::all();
         $clinics = Clinic::all();
+
         return view('Admin.reviews.index', compact('user', 'clinics', 'review'));
     }
 
@@ -58,7 +60,9 @@ class ReviewController extends Controller
         }
 
         $review->save();
-        return redirect()->back()->with('flash_message', 'Review Created Successfully!');
+        Alert::success('Success', 'Review Created Successfully!');
+
+        return redirect()->back();
     }
 
 
@@ -93,7 +97,7 @@ class ReviewController extends Controller
         $review['user_id'] = $request->user_id;
 
         Review::where(['id' => $id])->update($review);
-        return redirect('review')->with('flash_message', 'Review Updated!');
+        return redirect('review');
     }
 
     /**
@@ -102,6 +106,8 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         Review::destroy($id);
-        return redirect()->back()->with('flash_message', 'Review deleted!');
+        Alert::success('Success', 'Review Deleted Successfully!');
+
+        return redirect()->back();
     }
 }

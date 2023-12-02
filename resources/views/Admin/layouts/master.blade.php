@@ -41,6 +41,8 @@
 
 
 <!-- jQuery -->
+
+
 <script src="{{ asset('admin/assets/js/jquery-3.2.1.min.js') }}"></script>
 		
 <!-- Bootstrap Core JS -->
@@ -56,6 +58,17 @@
 
 <!-- Custom JS -->
 <script  src="{{ asset('admin/assets/js/script.js') }}"></script>
+
+<!-- Add this to your main layout or view file -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<script>
+    // Check if there are toast messages in the session and display them using toastr
+    @if(Session::has('success'))
+        toastr.success('{{ Session::get("success") }}');
+    @endif
+</script>
     </body>
 
     <!-- Mirrored from dreamguys.co.in/demo/doccure/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:34 GMT -->

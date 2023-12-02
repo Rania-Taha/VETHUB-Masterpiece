@@ -22,7 +22,7 @@ class CategorySeeder extends Seeder
 
             Our verified clinics are staffed by experienced veterinarians and offer a wide range of services to keep your furry friends happy and healthy.',
 
-            'image' => 'https://www.iconbolt.com/iconsets/tilda/veterinary-clinic-hotel.svg',
+            'image' => 'assets\img\clinic.JPG',
         ]);
         DB::table('categories')->insert([
             'name' => 'Ask A Vet',
@@ -30,7 +30,8 @@ class CategorySeeder extends Seeder
             'long_description' =>'
             Book with confidence Free chat or Charged Video call appointments to help you manage your pets health.
             VetHub connects pet owners to licensed veterinarians ready to provide the best online vet services through Free chat or Video call appointments 24/7. ',
-            'image' => 'https://previews.123rf.com/images/raufaliyev/raufaliyev2006/raufaliyev200600755/148208369-doctor-cat-veterinary-icon-simple-line-outline-vector-elements-of-veterinary-icons-for-ui-and-ux.jpg',
+            'image' => 'assets\img\doc.JPG',
+
         ]);
        
     }

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Clinic;
 use App\Traits\ImageUploadTrait;
 
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -18,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $page = User::paginate(5); // Fetch users with pagination, 10 users per page
+        $page = User::paginate(5); 
         $user = User::all();
         $clinics=Clinic::all();
         return view('Admin.users.index', compact('user', 'clinics','page'));
@@ -41,45 +42,42 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $request->validate([
-           
-            'first_name' => ['required', 'max:20'],
-            'last_name' => ['required', 'max:20'],
-            'email' => ['required', 'max:20'],
-            'password' => ['required', 'max:18'],
-            'address' => ['required', 'max:50'],
-            'phone' => ['required', 'max:10'],
-            'image' => ['required', 'image', 'max:4192'],
-            'role' => ['required', 'max:50'],
-        ]);
+    $request->validate([
+        'first_name' => ['required', 'string', 'max:50'],
+        'last_name' => ['required', 'string', 'max:50'],
+        'email' => ['required', 'email', 'max:255'],
+        'password' => ['required', 'string', 'min:8', 'max:255'],
+        'address' => [ 'string', 'max:255'],
+        'phone' => [ 'string', 'max:20'],
+        'image' => [ 'image', 'max:4192'],
+        'role' => ['required', 'string', 'max:50'],
+        'clinic_id' => ['nullable', 'exists:clinics,id'],
+    ]);
 
-       
-        $user = new User();
-        $imagePath = $this->uploadImage($request, 'image', 'uploads');
-        $user->image =  $imagePath;
-       
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->address = $request->address;
-        $user->phone = $request->phone;
-        $user->role = $request->role;
-        $user->clinic_id = $request->clinic_id;
+    $user = new User();
+    $imagePath = $this->uploadImage($request, 'image', 'uploads');
+    $user->image = $imagePath;
+   
+    $user->first_name = $request->first_name;
+    $user->last_name = $request->last_name;
+    $user->email = $request->email;
+    $user->password = $request->password;
+    $user->address = $request->address;
+    $user->phone = $request->phone;
+    $user->role = $request->role;
+    $user->clinic_id = $request->clinic_id;
+    $user->save();
+    
+    Session::flash('success', 'User created successfully!');
 
+       return redirect('user');
+}
 
-        
-
-        $user->save();
-        
-        // toastr('Created Successfully!', 'success');
-        return redirect('user');
-    }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show()
     {
         
     }
@@ -121,7 +119,9 @@ class UserController extends Controller
            
 
              User::where(['id' => $id])->update( $user);
-            return redirect('user')->with('flash_message', 'user Updated!');  
+             Session::flash('success', 'User Updated successfully!');
+
+            return redirect('user');  
     }
 
     /**
@@ -130,6 +130,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect ('user')->with('flash_message', 'User deleted!');
+        Session::flash('success', 'User Deleted successfully!');
+
+        return redirect ('user');
     }
 }

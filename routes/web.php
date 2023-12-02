@@ -14,6 +14,8 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HelloMail;
 
@@ -37,14 +39,18 @@ use App\Mail\HelloMail;
 
 
 // -------------- Auth Breeze ------------//
-Route::get('/dashboard', function () {
-    if (auth()->check()) {
-        $user = auth()->user();
-        View::share('user', $user);
-    }
+// Route::get('/dashboard', function () {
+//     if (auth()->check()) {
+//         $user = auth()->user();
+//         View::share('user', $user);
+//     }
+//     return view('Admin.dashboard');
+// })->middleware(['auth', 'admin'])->name('dashboard');
 
-    return view('Admin.dashboard');
-})->middleware(['auth', 'admin'])->name('dashboard');
+
+Route::get('/dashboard', [AdminController::class, 'dashboard'])
+    ->middleware(['auth', 'admin'])
+    ->name('dashboard');
 
 
 Route::get('/provider_dashboard', function () {

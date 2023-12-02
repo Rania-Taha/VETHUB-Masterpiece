@@ -6,20 +6,21 @@
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <div class="content container-fluid">
-
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-7 col-auto" style="margin-top: 12px ; margin-left: 30px ; ">
-                        <h3 class="page-title">Services</h3>
-                        
+                        <h3 class="page-title">Categories</h3>
+
                     </div>
-                  
-                    <div class="col-sm-12 " style="margin-top: 30px ; margin-left: 30px ; " >
-                     
-                            <a href= "{{ url('category/create')}}" class="btn btn-success class="btn btn-success  btn-md" title="Add New Service">
-                                Add New Category
-                            </a>
+                    <div class="col-sm-12 " style="margin-top: 30px ; margin-left: 30px ; ">
+
+                        <a href="{{ url('category/create') }}" class="btn btn-md" title="Add New Service"
+                            style="background-color: #7d7d7d; color: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none;">
+                            + Add New Category
+
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -84,13 +85,6 @@
                                                 {{-- {{ $item->long_description }}
                                             </td> --}}
 
-
-
-
-
-
-
-
                                             <td>
                                                 <img src="{{ asset($item->image) }}" style="height: 100px; width: 100px;">
                                             </td>
@@ -98,14 +92,19 @@
                                             <td class="text-right">
                                                 <div class="actions">
                                                     
-                                                    <a class="btn btn-primary" href="{{ route('category.edit', ['category' => $item->id]) }}">update</a>
-                                                    
-                                                    <form method="POST" action="{{ url('/category' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                        {{ method_field('DELETE') }}
-                                                        {{ csrf_field() }}
-                                                        <button type="submit" class="btn btn-danger " title="Delete Student" onclick="return confirm("Confirm delete?")"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                                    </form>
+                                                
+                                                    <a class="btn btn-md bg-success-light" href="{{ route('category.edit', ['category' => $item->id]) }}">Edit</a>
 
+
+                                                    <form method="POST"
+                                                    action="{{ url('/category' . '/' . $item->id) }}"
+                                                    accept-charset="UTF-8" style="display:inline">
+                                                    {{ method_field('DELETE') }}
+                                                    {{ csrf_field() }}
+                                                    <button type="submit" class="btn btn-md bg-danger-light"
+                                                        title="Delete Working Hours"
+                                                        onclick="return confirm('Confirm delete?')"> Delete</button>
+                                                </form>
                                     
                                                 </div>
                                             </td>

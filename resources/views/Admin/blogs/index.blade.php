@@ -3,26 +3,25 @@
 
 @section('content')
 
-    <!-- Page Wrapper -->
-    <div class="page-wrapper">
-        <div class="content container-fluid">
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-7 col-auto" style="margin-top: 12px ; margin-left: 30px ; ">
+                    <h3 class="page-title">Blogs</h3>
 
-            <!-- Page Header -->
-            <div class="page-header">
-                <div class="row">
-                    <div class="col-sm-7 col-auto" style="margin-top: 12px ; margin-left: 30px ; ">
-                        <h3 class="page-title">Blogs</h3>
-                        
-                    </div>
-                    <div class="col-sm-12 " style="margin-top: 30px ; margin-left: 30px ; " >
-                       
+                </div>
+                <div class="col-sm-12 " style="margin-top: 30px ; margin-left: 30px ; ">
 
-                            <a href= "{{ url('blog/create')}}" class="btn btn-success " title="Add New Blog">
-                                + Add New Blog
-                            </a>
-                    </div>
+                    <a href="{{ url('blog/create') }}" class="btn btn-md" title="Add New Service"
+                        style="background-color: #7d7d7d; color: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none;">
+                        + Add New Blog
+                    </a>
+
                 </div>
             </div>
+        </div>
             <!-- /Page Header -->
             <div class="row">
                 <div class="col-sm-12">
@@ -52,7 +51,7 @@
                                                
                                                 <?php
                                                 $description1 = strip_tags($item->short_description);
-                                                $limit = 30; // Adjust this to your desired character limit
+                                                $limit = 10; // Adjust this to your desired character limit
                                             
                                                 if (strlen($description1) > $limit) {
                                                     $shortDescription = substr($description1, 0, $limit) . '...';
@@ -66,7 +65,7 @@
                                                 
                                                 <?php
                                                 $about1 = strip_tags($item->section1 );
-                                                $limit = 30; // Adjust this to your desired character limit
+                                                $limit = 10; // Adjust this to your desired character limit
                                             
                                                 if (strlen($about1) > $limit) {
                                                     $about = substr($about1, 0, $limit) . '...';
@@ -81,7 +80,7 @@
 
                                                  <td><?php
                                                     $about2 = strip_tags($item->section2 );
-                                                    $limit = 30; // Adjust this to your desired character limit
+                                                    $limit = 10; // Adjust this to your desired character limit
                                                 
                                                     if (strlen($about2) > $limit) {
                                                         $about1 = substr($about2, 0, $limit) . '...';
@@ -96,7 +95,7 @@
                                                 <td>
                                                     <?php
                                                     $about2 = strip_tags($item->section3 );
-                                                    $limit = 30; // Adjust this to your desired character limit
+                                                    $limit = 10; // Adjust this to your desired character limit
                                                 
                                                     if (strlen($about2) > $limit) {
                                                         $about1 = substr($about2, 0, $limit) . '...';
@@ -107,7 +106,6 @@
                                                 
                                                     {{ $about1 }}</td>
                                                    
-                                                   </td>
 
                                             <td><img src="{{ asset($item->image1) }}" style="height: 100px; width: 100px;">
                                             </td>
@@ -117,18 +115,19 @@
                                             <td class="text-right">
                                                 <div class="actions">
                                                   
-                                                    <a class="btn btn-primary "
-                                                    href="{{ route('blog.edit', ['blog' => $item->id]) }}">Update</a>
+                      
+                                                        <a class="btn btn-md bg-success-light" href="{{ route('blog.edit', ['blog' => $item->id]) }}">Edit</a>
+
 
                                                         <form method="POST"
                                                         action="{{ url('/blog' . '/' . $item->id) }}"
-                                                            accept-charset="UTF-8" style="display:inline">
-                                                            {{ method_field('DELETE') }}
-                                                            {{ csrf_field() }}
-                                                            <button type="submit" class="btn btn-danger "
-                                                                title="Delete Working Hours"
-                                                                onclick="return confirm('Confirm delete?')"> Delete</button>
-                                                        </form>
+                                                        accept-charset="UTF-8" style="display:inline">
+                                                        {{ method_field('DELETE') }}
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" class="btn btn-md bg-danger-light"
+                                                            title="Delete Working Hours"
+                                                            onclick="return confirm('Confirm delete?')"> Delete</button>
+                                                    </form>
 
                                     
                                                 </div>

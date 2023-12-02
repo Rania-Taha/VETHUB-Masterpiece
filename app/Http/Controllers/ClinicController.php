@@ -12,10 +12,14 @@ use App\Models\Booking;
 use App\Models\Schedule;
 use App\Models\Review;
 use App\Traits\ImageUploadTrait;
-use Illuminate\Http\Request; // Add this line to import the Request class
-
+use Illuminate\Http\Request; 
 use App\Http\Requests\StoreClinicRequest;
 use App\Http\Requests\UpdateClinicRequest;
+use Illuminate\Support\Facades\Session;
+
+
+
+
 
 class ClinicController extends Controller
 {
@@ -40,25 +44,6 @@ class ClinicController extends Controller
             }
         }
     }
-
-//     public function searchClinics(Request $request)
-// {
-//     $criteria = $request->input('criteria'); // Get the search criteria (name or location)
-//     $query = $request->input('query'); // Get the search query entered by the user
-
-//     // Perform the search based on the criteria
-//     if ($criteria === 'name') {
-//         $clinics = Clinic::where('name', 'like', '%' . $query . '%')->get();
-//     } elseif ($criteria === 'location') {
-//         $clinics = Clinic::where('location', 'like', '%' . $query . '%')->get();
-//     } else {
-//         // Handle other criteria if needed
-//         $clinics = Clinic::all(); // Return all clinics by default if criteria is not valid
-//     }
-
-//     // Pass the search results to the view
-//     return view('frontend.clinics.search_results', compact('clinics'));
-// }
 
     /**
      * Show the form for creating a new resource.
@@ -91,7 +76,9 @@ class ClinicController extends Controller
         $clinic->location_map = htmlspecialchars($request->location_map);
         $clinic->about = htmlspecialchars($request->about);
         $clinic->save();
-        // toastr('Created Successfully!', 'success');
+
+        Session::flash('success', 'Clinic created successfully!');
+
         return redirect('clinic');
     }
 
@@ -102,7 +89,6 @@ class ClinicController extends Controller
         $category = Category::all();
         $query = $request->input('query');
         $criteria = $request->input('criteria');
-    
         $all_clinics = Clinic::query();
     
         // Apply search filters if present
@@ -113,12 +99,13 @@ class ClinicController extends Controller
                 $all_clinics->where('location', 'like', '%' . $query . '%');
             }
         }
-    
         // Paginate the results, showing 10 clinics per page
         $all_clinics = $all_clinics->latest()->paginate(6);
     
         return view('frontend.clinics.clinics', compact('all_clinics', 'category'));
     }
+
+
     
     
    
@@ -145,34 +132,19 @@ class ClinicController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function  edit($id)
-
-    // {
-    //     $clinic =  Clinic::find($id);
-    //     return view ('Admin.clinics.edit')->with('clinic',  $clinic);    
-    // }
     public function edit($id)
     {
         $clinic = Clinic::find($id);
     
         if (!$clinic) {
-            // Handle the case where the clinic with the provided ID is not found.
-            // You can redirect to an error page or return an error message.
-            // For example, you can return a 404 error view:
             return view('errors.404');
         }
-    
-        // Continue with your role-based logic to determine which view to return.
+
         if (Auth::check()) { // Use Auth::check() to check if a user is authenticated
             $role = Auth()->user()->role;
             if ($role == 'admin') {
                 return view('Admin.clinics.edit')->with('clinic', $clinic);
             } elseif ($role == 'provider') {
-                // Your provider logic here.
-                // You can return a different view for providers or handle their logic here.
                 return view('provider.clinic.edit')->with('clinic', $clinic);
 
             }
@@ -198,7 +170,9 @@ class ClinicController extends Controller
                 unset( $clinic['image']);
             }
              Clinic::where(['id' => $id])->update( $clinic);
-            return redirect('clinic')->with('flash_message', 'clinic Updated!');  
+             Session::flash('success', 'Clinic Updated successfully!');
+
+            return redirect('clinic');  
     }
 
     /**
@@ -207,6 +181,8 @@ class ClinicController extends Controller
     public function destroy($id)
     {
         Clinic::destroy($id);
-        return redirect('clinic')->with('flash_message', 'Clinic deleted!'); 
+        Session::flash('success', 'Clinic deleted successfully!');
+
+        return redirect('clinic'); 
     }
 }

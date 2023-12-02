@@ -6,6 +6,8 @@ use App\Models\Blog;
 use App\Traits\ImageUploadTrait;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
+use Illuminate\Support\Facades\Session;
+
 
 class BlogController extends Controller
 {
@@ -60,7 +62,7 @@ class BlogController extends Controller
 
         $blog->save();
         
-        // toastr('Created Successfully!', 'success');
+        Session::flash('success', 'Bolg created successfully!');
         return redirect('blog');
     }
 
@@ -126,7 +128,9 @@ class BlogController extends Controller
             }
            
              Blog::where(['id' => $id])->update($blog);
-            return redirect('blog')->with('flash_message', 'blog Updated!');
+             Session::flash('success', 'Bolg Updatted successfully!');
+
+            return redirect('blog');
     }
 
     /**
@@ -135,6 +139,8 @@ class BlogController extends Controller
     public function destroy($id)
     {
         Blog::destroy($id);
-        return redirect ('blog')->with('flash_message', 'Blog deleted!');
+        Session::flash('success', 'Bolg deleted successfully!');
+
+        return redirect ('blog');
     }
 }

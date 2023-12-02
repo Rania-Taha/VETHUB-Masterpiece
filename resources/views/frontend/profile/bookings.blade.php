@@ -143,6 +143,9 @@
 </div>
 
 
+
+
+
 <script>
     function openReviewModal(bookId) {
         var clinicRow = document.querySelector(`tr[data-book-id="${bookId}"]`);

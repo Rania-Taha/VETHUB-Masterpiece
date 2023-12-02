@@ -16,11 +16,20 @@
                             <div class="card-header">
                                 <h4>Add a Service</h4>
                             </div>
-                            <div class="card-body p-0">
+                            <div >
                                 <form action="{{ url('clinicService') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card">
                                         <div class="card-body">
+                                            <div class="form-group col-md-8">
+                                                <label for="clinic_id">Clinic Name</label>
+                                                <select name="clinic_id" id="clinic_id" class="form-control">
+                                                    <option value="">Select Clinic</option>
+                                                    @foreach ($clinics as $item)
+                                                        <option value=" {{ $item->id }}{{ $item->name }}">{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="image">Image</label>
@@ -45,8 +54,8 @@
                                                 </div>
                                             </div>
 
-
-                                            <div class="card-footer">
+                                           
+                                            <div >
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>

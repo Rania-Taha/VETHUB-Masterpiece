@@ -167,10 +167,12 @@ class BookingController extends Controller
             $booking->schedule_id = $payment ['schedule_id'];
 
             $booking->save();
-            Alert::success('Success', 'Your Reservation is confirmed!');
+            // Alert::success('Success', 'Your Reservation is confirmed!');
 
             // return redirect()->route('home');
-            return redirect()->back();
+            // return redirect()->back();
+            return view('frontend.thank_you');
+
 
             // return redirect()->route('index');
         } else {

@@ -11,6 +11,8 @@ use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Booking;
 use App\Models\Review;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 
 class ProfileController extends Controller
@@ -25,6 +27,7 @@ class ProfileController extends Controller
             $user = User::find($id);
             $bookings = Booking::where('user_id', $id)->get();
             $review = Review::where('user_id', $id)->get();
+
             return view('frontend.profile.profile_combine', compact('user', 'bookings', 'review'));
         } else {
             // Handle the case when the user is not authenticated/logged in
@@ -66,6 +69,7 @@ class ProfileController extends Controller
 
         // $book=Booking::where(['id' => $id])->update($data);
         // return Redirect::route('frontend.profile.profile')
+        Alert::success('Success', 'profile-updated!');
 
         return back()->with(compact('user', 'bookings'));
     }
@@ -84,8 +88,7 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit');
     }
 
     /**

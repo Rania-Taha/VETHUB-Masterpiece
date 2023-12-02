@@ -2,26 +2,25 @@
 
 
 @section('content')
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-7 col-auto" style="margin-top: 12px ; margin-left: 30px ; ">
+                    <h3 class="page-title">Clinics</h3>
 
-    <!-- Page Wrapper -->
-    <div class="page-wrapper">
-        <div class="content container-fluid">
+                </div>
+                <div class="col-sm-12 " style="margin-top: 30px ; margin-left: 30px ; ">
 
-            <!-- Page Header -->
-            <div class="page-header">
-                <div class="row">
-                    <div class="col-sm-7 col-auto" style="margin-top: 12px ; margin-left: 30px ; ">
-                        <h3 class="page-title">Clinics</h3>
-                       
-                    </div>
-                    <div class="col-sm-12 " style="margin-top: 30px ; margin-left: 30px ; " >
-                       
-                            <a href= "{{ url('clinic/create')}}" class="btn btn-success  btn-md" title="Add New Service">
-                                Add New Clinic
-                            </a>
-                    </div>
+                    <a href="{{ url('clinic/create') }}" class="btn btn-md" title="Add New Service"
+                        style="background-color: #7d7d7d; color: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none;">
+                        + Add New Clinic
+                    </a>
+
                 </div>
             </div>
+        </div>
             <!-- /Page Header -->
             <div class="row">
                 <div class="col-sm-12">
@@ -37,35 +36,47 @@
                                             <th>Description</th>
                                             <th>About</th>
                                             <th>Location_map</th>
-                                            <th>Image</th>
                                             <th >Actions</th>
 
                                         </tr>
                                     </thead>
-                                    <tbody style="text-align: center; vertical-align: middle;">
+                                    <tbody style="text-align: center; vertical-align: middle; font-size:16px">
                                         @foreach($clinic as $item)
                                         <tr>
-                                            <td>{{ $item->name }}</td>
+                                            <td class="sorting_1">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar avatar-sm me-3" style="margin-right: 7px">
+                                                        <img src="{{ asset($item->image) }}" alt="Avatar"
+                                                            class="rounded-circle" >
+                                                    </div>
+                                                    <div class="d-flex flex-column">
+                                                        <span>{{ $item->name }}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                           
                                             <td>{{ $item->location }}</td>
-                                            <td>{{ Illuminate\Support\Str::limit($item->description, 22) }}</td>
+                                            <td>{{ Illuminate\Support\Str::limit($item->description, 15) }}</td>
 
-                                                <td>{{ Illuminate\Support\Str::limit($item->about, 22) }}</td>
+                                                <td>{{ Illuminate\Support\Str::limit($item->about, 15) }}</td>
 
-                                                 <td>{{ Illuminate\Support\Str::limit($item->location_map, 22) }}</td>
-                                                 <td><img src="{{ asset($item->image) }}" style="height: 100px; width: 100px;">
+                                                 <td>{{ Illuminate\Support\Str::limit($item->location_map, 15) }}</td>
                                             </td>
  
-                                            <td class="text-right">
+                                            <td >
                                                 <div class="actions">
                                                   
-                                                    <a class="btn btn-primary" href="{{ route('clinic.edit', ['clinic' => $item->id]) }}">update</a>
-                                                    
-                                                    <form method="POST" action="{{ url('/clinic' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                        {{ method_field('DELETE') }}
-                                                        {{ csrf_field() }}
-                                                        <button type="submit" class="btn btn-danger" title="Delete Student" onclick="return confirm("Confirm delete?")"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                                    </form>
+                                                    <a class="btn btn-md bg-success-light" href="{{ route('clinic.edit', ['clinic' => $item->id]) }}">Edit</a>
 
+                                                    <form method="POST"
+                                                    action="{{ url('/clinic' . '/' . $item->id) }}"
+                                                    accept-charset="UTF-8" style="display:inline">
+                                                    {{ method_field('DELETE') }}
+                                                    {{ csrf_field() }}
+                                                    <button type="submit" class="btn btn-md bg-danger-light"
+                                                        title="Delete Working Hours"
+                                                        onclick="return confirm('Confirm delete?')"> Delete</button>
+                                                </form>
                                     
                                                 </div>
                                             </td>

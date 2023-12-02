@@ -2,10 +2,12 @@
 
 <div class="tab-pane fade" id="review" role="tab" aria-labelledby="review-tab">
     <div class="container-xxl flex-grow-1 container-p-y">
-        <br>
         <br>        <br>
 
-        
+        <h3 >Your Reviews</h3>
+
+        <br>
+
     @if (count($review) > 0)
     <div class="row">
         @php $counter = 0; @endphp <!-- Initializing a counter -->
@@ -45,37 +47,13 @@
                 </form>
             </div>
         </div>
-    @endforeach
-    
+        @endforeach
     </div>
-    
-</div>
-
-  
-  
-    @else
-<p>You have not posted any Review Yet.</p>
+    <br><br>
+   
+@else
+    <p>You have not posted any Review Yet.</p>
 @endif
-<br><br>
-<div class="col-lg-12">
-    <nav aria-label="Page navigation">
-              <ul class="pagination justify-content-center mb-4">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo; Previous</span>
-                  </a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">Next &raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-        </div>
-    </div>
     
-
+    </div>
+</div>

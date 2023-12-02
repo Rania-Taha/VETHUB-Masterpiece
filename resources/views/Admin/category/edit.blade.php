@@ -2,24 +2,18 @@
  @extends('Admin.layouts.master')
 
 @section('content')
-    <!-- Main Content -->
-    <div class="main-content" style="margin-left:290px ; width:75%">
-        <section class="section">
+<div class="main-content" style="margin-left: 290px; width: 75%; padding: 20px;">
+    <section class="section">
+        <div class="section-body">
             <div class="section-header">
                 <h1>Category</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item">Category</div>
-                </div>
             </div>
-
-            <div class="section-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Edit</h4> Category</h4>
-                            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Edit a Category</h4>
+                        </div>
                             <div class="card-body p-0">
                                 <form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
@@ -51,8 +45,6 @@
                                                 <div class="form-group col-md-8">
                                                     <label for="short_description">Short Description</label>
                                                     <textarea class="summernote-simple" name="short_description" id="short_description" placeholder="Enter a description" style="width: 700px ; height:80px">{{$category->short_description }}</textarea>
-
-
                                                 </div>
                                             </div>
                                             <div class="form-row">

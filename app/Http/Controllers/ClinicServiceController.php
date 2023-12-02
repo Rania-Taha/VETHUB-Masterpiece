@@ -22,7 +22,7 @@ class ClinicServiceController extends Controller
                 $id = Auth::user()->id;
                 $user = User::find($id);
                 $clinic_service = Clinic_Service::all();
-                return view('Admin.clinic_service.index', compact('clinic_service'));
+                return view('Admin.clinic_service.index', compact('clinic_service' ));
             } elseif ($role == 'provider') {
                 $id = Auth::user()->id;
                 $user = User::find($id);
@@ -38,7 +38,9 @@ class ClinicServiceController extends Controller
      */
     public function create()
     {
-        return view('Admin.clinic_service.create');
+        $clinics=Clinic::all();
+
+        return view('Admin.clinic_service.create', compact( 'clinics'));
     }
     public function create1()
     {

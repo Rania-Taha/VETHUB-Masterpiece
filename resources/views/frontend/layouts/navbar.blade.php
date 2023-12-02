@@ -33,8 +33,7 @@
 
               @if (Route::has('login'))
                   @auth
-                      <!-- Placeholder for authenticated user dropdown -->
-                      <li class="nav-item dropdown" style="margin-left: 210px">
+                      <li class="nav-item dropdown"  >
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               My Account
                           </a>
@@ -49,14 +48,15 @@
                           </ul>
                       </li>
                   @else
-                      <!-- User is not logged in -->
-                      <li style="margin-left: 190px"><a id="loginbnt" class="btn btn-md btn-primary mt-3 mt-md-4 px-4" href="{{ route('login') }}">Login</a></li>
+                      <li style="margin-left: 230px"><a id="loginbnt" class="btn btn-md btn-primary mt-3 mt-md-4 px-4" href="{{ route('login') }}">Login</a></li>
                   @endauth
               @endif
           </div>
       </div>
   </nav>
 </div>
+
+
 
 <script>
   // Function to handle link clicks

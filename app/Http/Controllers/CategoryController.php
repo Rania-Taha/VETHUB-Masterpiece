@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Traits\ImageUploadTrait;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Support\Facades\Session;
+
 
 
 
@@ -53,7 +55,7 @@ class CategoryController extends Controller
 
         $category->save();
         
-        // toastr('Created Successfully!', 'success');
+        Session::flash('success', 'category Created successfully!');
         return redirect('category');
        
 
@@ -102,7 +104,9 @@ class CategoryController extends Controller
            
 
             Category::where(['id' => $id])->update($category);
-            return redirect('category')->with('flash_message', 'student Updated!');  
+            Session::flash('success', 'category Updatted successfully!');
+
+            return redirect('category');  
           }
 
     /**
@@ -112,6 +116,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::destroy($id);
-        return redirect ('category')->with('flash_message', 'Category deleted!'); 
+        Session::flash('success', 'category deleted successfully!');
+
+        return redirect ('category'); 
          }
 }

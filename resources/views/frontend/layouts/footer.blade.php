@@ -1,19 +1,19 @@
  <!-- Footer Start -->
  <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
     <div class="row pt-5">
-      <div class="col-lg-4 col-md-12 mb-5">
+      <div class="col-lg-5 col-md-12 mb-5">
         <h1 class="mb-3 display-5 text-capitalize text-white">
           <span class="text-primary">Vet</span
           ><span class="text-light">Hub</span>
         </h1>
+        <br>
         <p class="m-0">
-          At VetHub , we’re pet lovers first, and vet services provider
-          second. Our passion for exceptional pet care and customer service is
-          fueled by our respect for the human-animal bond. As a full-service website, we are able to provide for
-          your pet’s wide-ranging needs, there is very little we can’t do!
+          At VetHub , we’re pet lovers first, and vet services <br>provider
+          second. Our passion for exceptional pet care <br> and customer service is
+          fueled by our respect for the <br> human-animalbond. 
         </p>
       </div>
-      <div class="col-lg-8 col-md-12">
+      <div class="col-lg-7 col-md-12">
         <div class="row">
           <div class="col-lg-4 mb-5 brandfooter2">
             <h5 class="text-primary mb-4">Get In Touch</h5>
@@ -47,7 +47,7 @@
               ></a>
             </div>
           </div>
-          <div class="col-md-4 mb-5 brandfooter2">
+          <div class="col-md-3 mb-5 brandfooter2">
             <h5 class="text-primary mb-4">Popular Links</h5>
             <div class="d-flex flex-column justify-content-start">
               <a class="text-white mb-2" href="#"

@@ -509,8 +509,9 @@ button.bg-danger:hover {
     border-color: #0A6506!important;
 }
 .btn-primary {
-	background-color: #0A6506;
-    border: 1px solid #0A6506;
+	background-color: #29b664;
+    border: 1px solid white;
+	
 }
 .btn-primary:hover,
 .btn-primary:focus,

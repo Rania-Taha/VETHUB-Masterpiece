@@ -16,7 +16,7 @@
 
     <br>
        <!-- Search input -->
-       <div class="mt-4" style="width: 700px">
+       <div class="mt-4" style="width: 100%">
         <form action="{{ url()->current() }}" method="GET">
           <div class="input-group mb-3">
                 <div class="input-group-prepend" style="margin-right: 10px">
@@ -25,7 +25,7 @@
                         <option value="location">Search by Location</option>
                     </select>
                 </div> 
-                <input type="text" class="form-control" placeholder="Enter search query..." name="query" style="padding: 1rem; font-size: 1rem; border: 1px solid #ced4da; border-radius: 0.25rem;">
+                <input type="text" class="form-control" placeholder="Enter your search ..." name="query" style="padding: 1rem; font-size: 1rem; border: 1px solid #ced4da; border-radius: 0.25rem;">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">Search</button>
                 </div>
@@ -51,19 +51,26 @@
                 {{-- <img src="img/treaty.png" class="card-img-top" alt="Clinic Image" /> --}}
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ $item->name }}</h5>
-                    <div class="rating-paws">
-                        <div class="d-flex justify-content-center">
-                            <p class="mr-2 text-dark">Rating:</p>
-                            <p>
-                                <i class="fas fa-paw text-primary"></i>
-                                <i class="fas fa-paw text-primary"></i>
-                                <i class="fas fa-paw text-primary"></i>
-                                <i class="fas fa-paw text-primary"></i>
-                                <i class="fas fa-paw text-primary"> </i>
-                                25 Review
-                            </p>
-                        </div>
-                    </div>
+                    {{-- Calculate average rating --}}
+                @php
+                $totalReviews = $item->review()->count(); // Assuming 'reviews' is the relation to reviews table
+                $averageRating = $totalReviews > 0 ? $item->review()->avg('rating') : 0;
+                $roundedRating = round($averageRating);
+            @endphp
+
+            <div class="rating-paws">
+                <div class="d-flex justify-content-center">
+                    <p class="mr-2 text-dark">Rating:</p>
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $roundedRating)
+                            <i class="fas fa-paw text-primary"></i>
+                        @else
+                            <i class="fas fa-paw"></i>
+                        @endif
+                    @endfor
+                    <span style="margin-left: 10px">{{ $totalReviews }} Review{{ $totalReviews !== 1 ? 's' : '' }}</span>
+                </div>
+            </div>
                     <p class="text-center">{{ $item->location }}</p>
                     <a href="{{ route('single_clinic',$item->id) }}" class="btn btn-lg btn-primary mt-3 mt-md-4 px-3">See Details</a>
 
