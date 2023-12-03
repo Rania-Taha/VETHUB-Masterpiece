@@ -8,6 +8,8 @@ use App\Models\Clinic;
 use App\Http\Requests\StoreWorking_hoursRequest;
 use App\Http\Requests\UpdateWorking_hoursRequest;
 use Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class WorkingHoursController extends Controller
 {
@@ -45,8 +47,6 @@ class WorkingHoursController extends Controller
     {
                 $clinic = Clinic::all();
                 $user= User::find(1);
-                // $id=Auth::user()->id;
-                // $user= User::find($id);
                 return view('Admin.working_hours.create', compact('user', 'clinic'));
 
     }
@@ -61,6 +61,8 @@ class WorkingHoursController extends Controller
             'day' => ['required', 'max:20'],
             'start_at' => ['required', 'max:20'],
             'ends_at' => ['required', 'max:20'],
+            'clinic_id' => ['required'],
+
         ]);
 
        
@@ -74,7 +76,7 @@ class WorkingHoursController extends Controller
 
         $working_hours->save();
         
-        // toastr('Created Successfully!', 'success');
+        Session::flash('success', 'Created successfully!');
         return redirect('workHours');
     }
 
@@ -91,13 +93,7 @@ class WorkingHoursController extends Controller
      */
     public function edit($id)
     {
-        
-        // $working_hours =  Working_hours::find($id);
-        // $clinic = Clinic::all();
-        // $user= User::find($id);
-        // return view('Admin.working_hours.edit', compact('working_hours','user', 'clinic'));
-
-
+ 
         if (Auth::id()) {
             $role = Auth()->user()->role;
             if ($role == 'admin') {
@@ -115,43 +111,32 @@ class WorkingHoursController extends Controller
             }
         }
 
-       
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-//     public function update(UpdateWorking_hoursRequest $request,  $id)
-//     {
-//         {
-//             $working_hours['day'] = $request->day;
-//             $working_hours['start_at'] = $request->start_at;
-//             $working_hours['ends_at'] = $request->ends_at;
-           
-
-//             Working_hours::where(['id' => $id])->update( $working_hours);
-//            return redirect('workHours')->with('flash_message', 'clinic Updated!'); 
-//     }
-// }
-public function update(UpdateWorking_hoursRequest $request, $id)
-{
-    // Find the specific working_hours record by its ID
-    $working_hours = Working_hours::find($id);
-
-    // Check if the record was found
-    if (!$working_hours) {
-        return redirect()->back()->with('error_message', 'Working hours not found');
+    public function update(UpdateWorking_hoursRequest $request, $id)
+    {
+        // Find the specific working_hours record by its ID
+        $working_hours = Working_hours::find($id);
+    
+        // Check if the record was found
+        if (!$working_hours) {
+            return redirect()->back()->with('error_message', 'Working hours not found');
+        }
+    
+        // Update the record with the new data
+        $working_hours->day = $request->day;
+        $working_hours->start_at = $request->start_at;
+        $working_hours->ends_at = $request->ends_at;
+        $working_hours->clinic_id = $request->clinic_id;
+    
+        // Save the updated record
+        $working_hours->save();
+    
+        // Flash a success message and redirect
+        Session::flash('success', 'Working hours Updated!');
+        return redirect('workHours');
     }
-
-    // Update the record with the new data
-    $working_hours->day = $request->day;
-    $working_hours->start_at = $request->start_at;
-    $working_hours->ends_at = $request->ends_at;
-
-    $working_hours->save();
-
-    return redirect('workHours')->with('flash_message', 'Working hours Updated!');
-}
+    
 
 
     /**
@@ -160,6 +145,8 @@ public function update(UpdateWorking_hoursRequest $request, $id)
     public function destroy($id)
     {
         Working_hours::destroy($id);
-        return redirect ('workHours')->with('flash_message', 'Working Hours deleted!'); 
+        Session::flash('success', 'Working Hours deleted!!');
+
+        return redirect ('workHours'); 
     }
 }

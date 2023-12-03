@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clinic_vet;
 use App\Models\User;
+use App\Models\Clinic;
 use App\Traits\ImageUploadTrait;
 use App\Http\Requests\StoreClinic_vetRequest;
 use App\Http\Requests\UpdateClinic_vetRequest;
@@ -27,15 +28,17 @@ class ClinicVetController extends Controller
                 $id = Auth::user()->id;
                 $user = User::find($id);
                 $clinic_vet = Clinic_vet::with('clinic')->get();
-                // dd($clinic_vet);
-                return view('Admin.clinic_vet.index', compact('clinic_vet'));
+                $clinics = Clinic :: all();
+                return view('Admin.clinic_vet.index', compact('clinic_vet', 'clinics'));
 
             } elseif ($role == 'provider') {
                 $id = Auth::user()->id;
                 $user = User::find($id);
                 $clinicuser = $user->clinic_id;
                 $clinic_vet = Clinic_vet::where('clinic_id', $clinicuser)->get();
-                return view ('provider.provider_clinic_vet.index')->with('clinic_vet', $clinic_vet);
+                $clinics = Clinic :: all();
+                return view('provider.provider_clinic_vet.index', compact('clinic_vet', 'clinics'));
+
             }
         }
     }
@@ -45,7 +48,10 @@ class ClinicVetController extends Controller
      */
     public function create()
     {
-        return view('Admin.clinic_vet.create');
+        $clinics = Clinic :: all();
+
+        return view('Admin.clinic_vet.create', compact( 'clinics'));
+
     }
 
     /**
@@ -55,8 +61,9 @@ class ClinicVetController extends Controller
     {
         $request->validate([
             'image' => ['required', 'image', 'max:4192'],
-            'name' => ['required', 'max:20'],
+            'name' => ['required', 'max:100'],
             'position' => ['required', 'max:500'],
+            'clinic_id'=> ['required'],
         ]);
 
        
@@ -67,11 +74,12 @@ class ClinicVetController extends Controller
         $clinic_vet->image =  $imagePath;
         $clinic_vet->name = $request->name;
         $clinic_vet->position = htmlspecialchars($request->position);
+        $clinic_vet->clinic_id = $request->clinic_id;
 
         $clinic_vet->save();
         
        
-        Session::flash('success', 'Service created successfully!');
+        Session::flash('success', 'Vet created successfully!');
 
         return redirect('clinicVet');
     }
@@ -92,14 +100,20 @@ class ClinicVetController extends Controller
         if (Auth::id()) {
             $role = Auth()->user()->role;
             if ($role == 'admin') {
-                $clinic_vet = Clinic_vet::find($id); // Get the specific clinic_vet based on $id
-                return view('Admin.clinic_vet.edit')->with('clinic_vet', $clinic_vet);
+                $clinic_vet = Clinic_vet::find($id); 
+                $clinics = Clinic :: all();
+
+                return view('Admin.clinic_vet.edit', compact( 'clinics' , 'clinic_vet'));
+
             } elseif ($role == 'provider') {
                 $id = Auth::user()->id;
                 $user = User::find($id);
                 $clinicuser = $user->clinic_id;
-                $clinic_vet = Clinic_vet::where('clinic_id', $clinicuser)->first(); // Get the first clinic_vet
-                return view('provider.provider_clinic_vet.edit')->with('clinic_vet', $clinic_vet);
+                $clinic_vet = Clinic_vet::where('clinic_id', $clinicuser)->first();
+                $clinics = Clinic :: all();
+
+                return view('provider.provider_clinic_vet.edit', compact( 'clinics' , 'clinic_vet'));
+
             }
         }
     }
@@ -109,8 +123,18 @@ class ClinicVetController extends Controller
      */
     public function update(UpdateClinic_vetRequest $request, $id)
     {
+        $request->validate([
+            'image' => ['required', 'image', 'max:4192'],
+            'name' => ['required', 'max:100'],
+            'position' => ['required', 'max:500'],
+            'clinic_id'=> ['required'],
+        ]);
+
         $clinic_vet['name'] = $request->name;
         $clinic_vet['position'] = $request->position;
+        $clinic_vet['clinic_id'] = $request->clinic_id;
+        $clinic_vet['image'] = $request->image;
+
 
 
         $filename = '';
@@ -123,9 +147,8 @@ class ClinicVetController extends Controller
             unset($clinic_vet['image']);
         }
        
-
         Clinic_vet::where(['id' => $id])->update($clinic_vet);
-        Session::flash('success', 'Service Updated successfully!');
+        Session::flash('success', 'Vet Updated successfully!');
 
         return redirect('clinicVet'); 
     }

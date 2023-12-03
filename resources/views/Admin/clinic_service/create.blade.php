@@ -16,7 +16,7 @@
                             <div class="card-header">
                                 <h4>Add a Service</h4>
                             </div>
-                            <div >
+                            <div>
                                 <form action="{{ url('clinicService') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card">
@@ -26,10 +26,13 @@
                                                 <select name="clinic_id" id="clinic_id" class="form-control">
                                                     <option value="">Select Clinic</option>
                                                     @foreach ($clinics as $item)
-                                                        <option value=" {{ $item->name }}">{{ $item->name }}</option>
+                                                        <option value=" {{ $item->id }}">{{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            @error('clinic_id')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="image">Image</label>
@@ -37,6 +40,9 @@
                                                         placeholder="Choose an image">
                                                 </div>
                                             </div>
+                                            @error('image')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="service_name">Name</label>
@@ -45,6 +51,9 @@
                                                 </div>
 
                                             </div>
+                                            @error('service_name')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="description">Description</label>
@@ -53,9 +62,12 @@
                                                         style="width: 700px ; height:80px"></textarea>
                                                 </div>
                                             </div>
+                                            @error('description')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
 
-                                           
-                                            <div >
+
+                                            <div>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>

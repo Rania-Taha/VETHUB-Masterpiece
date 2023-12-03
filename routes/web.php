@@ -33,56 +33,27 @@ use App\Mail\HelloMail;
 |
 */
 
-// Route::get('/', function () {
-//     return view('frontend.home.index');
-// });
 
 
-// -------------- Auth Breeze ------------//
-// Route::get('/dashboard', function () {
-//     if (auth()->check()) {
-//         $user = auth()->user();
-//         View::share('user', $user);
-//     }
-//     return view('Admin.dashboard');
-// })->middleware(['auth', 'admin'])->name('dashboard');
-
+// -------------- Auth Routes Start ------------//
 
 Route::get('/dashboard', [AdminController::class, 'dashboard'])
     ->middleware(['auth', 'admin'])
     ->name('dashboard');
 
 
-Route::get('/provider_dashboard', function () {
-    if (auth()->check()) {
-        $user = auth()->user();
-        dd($user);
-        return view('provider.dashboard', ['user' => $user]);
-    }
+Route::get('/provider-dashboard', [AdminController::class, 'provider'])
+    ->middleware(['auth', 'provider'])
+    ->name('provider-dashboard');
 
-    // Handle the case when the user is not authenticated, e.g., redirect to login
-    return redirect()->route('login');
-})->middleware(['auth', 'admin'])->name('provider_dashboard');
-
-
-// Route::get('/provider_dashboard', function () {
-//     return view('provider.dashboard');
-// })->middleware(['auth', 'provider'])->name('provider_dashboard');
+// -------------- Auth Routes End ------------//
 
 
 
+route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-route::get('/', [HomeController::class,'index'])->name('home');
-
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 
@@ -106,31 +77,36 @@ Route::post('/editprofile', [AdminProfileController::class, 'edit'])->name('edit
 
 
 
-Route::get('/clinicService/create1', 'ClinicServiceController@create1')->name('clinicService.create');
+Route::get('/clinicService/create1', [ClinicServiceController::class, 'create1'])->name('clinicService.create');
 
 
 
 // ------------------ PAGES -------------------//
 
-Route::get('/about', function () {return view('frontend.about.about');})->name('about');
-Route::get('/contact', function () {return view('frontend.contact.index');})->name('contact');
+Route::get('/about', function () {
+    return view('frontend.about.about'); })->name('about');
+Route::get('/contact', function () {
+    return view('frontend.contact.index'); })->name('contact');
 // Route::get('/blog_', function () {return view('frontend.blogs.blogs');})->name('blog_');
 // Route::get('/clinics', function () {return view('frontend.clinics.clinics');})->name('clinics');
-Route::get('/ask_a_vet', function () {return view('frontend.ask_a_vet.ask_a_vet');})->name('ask_a_vet');
+Route::get('/ask_a_vet', function () {
+    return view('frontend.ask_a_vet.ask_a_vet'); })->name('ask_a_vet');
 
 
-route::get('/user_profile', [ProfileController::class,'index'])->name('user_profile')->middleware(['auth', 'verified']);;
-route::post('/user_profile_edit', [ProfileController::class,'edit'])->name('user.profile.edit')->middleware(['auth', 'verified']);;
+route::get('/user_profile', [ProfileController::class, 'index'])->name('user_profile')->middleware(['auth', 'verified']);
+;
+route::post('/user_profile_edit', [ProfileController::class, 'edit'])->name('user.profile.edit')->middleware(['auth', 'verified']);
+;
 
 
 //Clinics page
-route::get('/clinic_', [ClinicController::class,'show'])->name('clinics');
-route::get('/single_clinic/{id}', [ClinicController::class,'show1'])->name('single_clinic');
-route::get('/blog_website', [BlogController::class,'show1'])->name('blog_website');
-route::get('/single_blog/{id}', [BlogController::class,'show2'])->name('single_blog');
+route::get('/clinic_', [ClinicController::class, 'show'])->name('clinics');
+route::get('/single_clinic/{id}', [ClinicController::class, 'show1'])->name('single_clinic');
+route::get('/blog_website', [BlogController::class, 'show1'])->name('blog_website');
+route::get('/single_blog/{id}', [BlogController::class, 'show2'])->name('single_blog');
 
 
-Route::post('/bookings', [BookingController::class,'store'])->name('bookings.store'); 
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
 // Route::middleware(['auth.booking'])->group(function () {
 //     Route::post('/bookings', 'BookingController@store')->name('bookings.store');
@@ -151,4 +127,4 @@ Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews
 
 //PAYPAL
 Route::get('paypal/success', [BookingController::class, 'success'])->name('paypal_success');
-Route::get('paypal/cancel',  [BookingController::class, 'cancel'])->name('paypal_cancel');
+Route::get('paypal/cancel', [BookingController::class, 'cancel'])->name('paypal_cancel');

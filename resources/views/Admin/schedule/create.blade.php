@@ -22,50 +22,46 @@
                                     @csrf
                                     <div class="card">
                                         <div class="card-body">
-
-
-                                            {{-- <div class="form-row">
-                                                <div class="form-group col-md-8">
-                                                    <label for="clinic_id">Clinic Id</label>
-                                                    <select name="clinic_id" id="clinic_id" class="form-control">
-
-                                                        <option value="{{ $schedule->clinic_id }}">
-                                                            {{ $schedule->clinic_id }}</option>
-
-                                                    </select>
-                                                </div>
-
-                                            </div> --}}
-                                            <div class="form-row">
-                                                <div class="form-group col-md-8">
-                                                    <label for="clinic_id">Clinic Id</label>
-                                                    <select name="clinic_id" id="clinic_id" class="form-control">
-                                                        
-                                                        <option value="{{ $user->clinic_id }}"> {{ $user->clinic_id }}</option>
-                                                        
-                                                    </select>
-                                                </div>
-
-                                            </div>
+                                            <div class="form-group col-md-8">
+                                                <label for="clinic_id">Clinic Name</label>
+                                                <select name="clinic_id" id="clinic_id" class="form-control">
+                                                    <option value="">Select Clinic</option>
+                                                    @foreach ($clinic as $item)
+                                                        <option value=" {{ $item->id }}">{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>  @error('clinic_id')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
 
                                             <div class="form-row">
-                                                <div class="form-group col-md-8">
+                                                <div class="form-group col-md-4">
                                                     <label for="time">Time</label>
                                                     <input type="text" name="time" class="form-control"
                                                         id="time" placeholder="Enter Start At Hour">
+                                                        @error('time')
+                                                        <div class="text-danger small">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-8">
+
+                                              
+                                                <div class="form-group col-md-4">
                                                     <label for="status">Status</label>
                                                     <select name="status" id="status" class="form-control">
                                                         <option value="Active">Active</option>
                                                         <option value="Inactive">Inactive</option>
 
                                                     </select>
+                                                    @error('status')
+                                                    <div class="text-danger small">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
 
+
+                                          
                                             </div>
+                                           
+                                           
 
 
 

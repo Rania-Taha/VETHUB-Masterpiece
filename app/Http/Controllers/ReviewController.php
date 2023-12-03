@@ -11,6 +11,8 @@ use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
 use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Session;
+
 
 
 class ReviewController extends Controller
@@ -106,8 +108,7 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         Review::destroy($id);
-        Alert::success('Success', 'Review Deleted Successfully!');
-
+        Session::flash('success', 'Review deleted!');
         return redirect()->back();
     }
 }

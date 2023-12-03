@@ -88,6 +88,8 @@
                                                             title="Delete Working Hours"
                                                             onclick="return confirm('Confirm delete?')"> Delete</button>
                                                     </form>
+
+                                                    
                                                     </div>
                                                 </td>
                                             </tr>

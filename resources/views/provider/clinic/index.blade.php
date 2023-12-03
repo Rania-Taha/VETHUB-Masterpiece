@@ -1,118 +1,43 @@
 @extends('provider.layouts.master')
 
-
 @section('content')
-
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <div class="content container-fluid">
 
-            <!-- Page Header -->
-            <div class="page-header">
-                <div class="row">
-                    <div class="col-sm-7 col-auto">
-                        <br>
-                        <br>
-                        <h3 class="page-title">My Clinic</h3>
-                        
-                    </div>
-     
-                </div>
-            </div>
+            <br>
+            <br>
             <!-- /Page Header -->
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="datatable table table-hover table-center mb-0">
-                                    <thead style="text-align: center; vertical-align: middle;">
 
-                                        <tr style="text-align: center; vertical-align: middle;">
-                                            <th>Name</th>
-                                            <th>Location</th>
-                                            <th>Description</th>
-                                            <th >About</th>
-                                            <th>Location_map</th>
-                                            <th>Image</th>
-                                            <th>Actions</th>
+            <div class="row justify-content-center"> <!-- Center the content -->
 
-                                        </tr>
-                                    </thead>
-                                    <tbody style="text-align: center; vertical-align: middle;">
-                                        @foreach($clinic as $item)
-                                        <tr>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->location }}</td>
-                                            <td >
-                                               
-                                                <?php
-                                                $description1 = strip_tags($item->description);
-                                                $limit = 30; // Adjust this to your desired character limit
-                                            
-                                                if (strlen($description1) > $limit) {
-                                                    $shortDescription = substr($description1, 0, $limit) . '...';
-                                                } else {
-                                                    $shortDescription = $description1;
-                                                }
-                                                ?>
-                                            
-                                                {{ $shortDescription }}</td>
-                                            <td >
-                                                
-                                                <?php
-                                                $about1 = strip_tags($item->about );
-                                                $limit = 30; // Adjust this to your desired character limit
-                                            
-                                                if (strlen($about1) > $limit) {
-                                                    $about = substr($about1, 0, $limit) . '...';
-                                                } else {
-                                                    $about = $about1;
-                                                }
-                                                ?>
-                                            
-                                                {{ $about }}
-                                                
-                                                 </td>
-                                                 <td>{{ Illuminate\Support\Str::limit($item->location_map, 22) }}</td>
+                @foreach ($clinic as $item)
+                    <div class="col-md-12"> <!-- Adjust the width of the container -->
 
-                                            <td><img src="{{ asset($item->image) }}" style="height: 100px; width: 100px;">
-                                            </td>
- 
-                                            <td class="text-right">
-                                                <div class="actions">
-                                                  
-                                                    <a class="btn btn-primary" href="{{ route('clinic.edit', ['clinic' => $item->id]) }}">update</a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                        <div class="border p-4 mb-4 text-center"> <!-- Center the content -->
+                            <h3 class="page-title">My Clinic</h3>
+                            <br>
+                            <img src="{{ asset($item->image) }}" alt="Clinic Image" class="rounded-circle"
+                                style="width: 200px; height: 200px; object-fit: cover; margin-bottom: 20px;">
 
-                                        @endforeach                               
-                                         </tbody>
-                                    
-                                </table>
-                            </div>
+                            <h5> Name :{{ $item->name }}</h5>
+
+                            <h5> Location :{{ $item->location }}</h5>
+                            <h6>Description :{{ Illuminate\Support\Str::limit(strip_tags($item->description), 80) }}</h6>
+                            <h6> About :{{ Illuminate\Support\Str::limit(strip_tags($item->about), 70) }}</h6>
+                            <center>
+                                <div style="text-align: center; width:600px; ">
+                                    {!! $item->location_map !!} <!-- Center the map -->
+                                </div>
+                            </center>
+                            <a class="btn btn-lg bg-success-light"
+                                href="{{ route('clinic.edit', ['clinic' => $item->id]) }}">Edit</a>
+
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
     <!-- /Page Wrapper -->
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection

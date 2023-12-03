@@ -43,10 +43,9 @@ class ProfileController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|email',
-            'phone' => 'required',
-            'regex:/^(079|078|077)\d{7}$/|max:10',
-            'address' => 'required|string',
-            'image' => 'image|mimes:jpeg,png,jpg,gif',
+            'phone' => ['nullable', 'numeric', 'regex:/^(079|078|077)\d{7}$/', 'digits_between:7,10'],
+            'address' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
         $data['first_name'] = $request->first_name;
         $data['last_name'] = $request->last_name;

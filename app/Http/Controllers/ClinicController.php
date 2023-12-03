@@ -60,7 +60,7 @@ class ClinicController extends Controller
     {
         $request->validate([
             'image' => ['required', 'image', 'max:4192'],
-            'name' => ['required', 'max:20'],
+            'name' => ['required', 'max:50'],
             'description' => ['required', 'max:1000'],
             'about' => ['required', 'max:1000'],
             'location' => ['required', 'max:1000'],
@@ -155,6 +155,16 @@ class ClinicController extends Controller
      */
     public function update(UpdateClinicRequest $request,  $id)
     {
+
+        $request->validate([
+            'image' => [ 'image', 'max:4192'],
+            'name' => ['required', 'max:50'],
+            'description' => ['required', 'max:1000'],
+            'about' => ['required', 'max:1000'],
+            'location' => ['required', 'max:1000'],
+            'location_map' => ['required', 'max:1000'],
+        ]);
+        
              $clinic['name'] = $request->name;
              $clinic['description'] = $request->description;
              $clinic['about'] = $request->about;

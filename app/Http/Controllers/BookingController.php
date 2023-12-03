@@ -12,6 +12,8 @@ use App\Http\Requests\UpdateBookingRequest;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Session;
+
 
 class BookingController extends Controller
 {
@@ -26,7 +28,7 @@ class BookingController extends Controller
             $user = User::find($id);
 
             if ($role == 'admin') {
-                $book = Booking::all();
+                $book = Booking::with('schedule')->get();
                 $schedules = Schedule::all();
                 return view('Admin.bookings.index', compact('user', 'schedules', 'book'));
             } elseif ($role == 'provider') {
@@ -122,22 +124,6 @@ class BookingController extends Controller
                 return redirect()->back();
               };
         } 
-
-
-            // if (!$isTimeSlotBooked) {
-                
-            //     $booking = new Booking();
-            //     $booking->date = $selectedDate;
-            //     $booking->time = $selectedTime;
-            //     $booking->user_id = auth()->id(); 
-            //     $booking->schedule_id = $scheduleId;
-            //     $booking->save();
-
-            //     Alert::success('success', 'Your appointment has been successfully booked. Thank you for choosing our services.');
-            //     return back();
-            // } else {
-            //     Alert::error('Sorry', 'The selected time has already been booked. Please choose another available time.');
-            // }
         }
        
     
@@ -230,8 +216,9 @@ class BookingController extends Controller
     public function destroy($id)
     {
         Booking::destroy($id);
-        // return redirect ('book')->with('flash_message', 'Booking deleted!');
-        return redirect()->back()->with('flash_message', 'Booking deleted!');
+        Session::flash('success', 'Booking deleted!');
+
+        return redirect()->back();
 
     }
 }

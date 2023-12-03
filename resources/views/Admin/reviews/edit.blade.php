@@ -38,6 +38,9 @@
                                                 </div>
 
                                             </div>
+                                            @error('user_id')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
 
                                             
                                             <div class="form-row">
@@ -48,6 +51,9 @@
                                                 </div>
 
                                             </div>
+                                            @error('review_text')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
 
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
@@ -57,6 +63,9 @@
                                                 </div>
 
                                             </div>
+                                            @error('rating')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                    
 
                                             <div class="form-row">
@@ -71,11 +80,14 @@
                                                 </div>
 
                                             </div>
+                                            @error('clinic_id')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             
                                            
 
 
-                                            <div class="card-footer">
+                                            <div >
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>

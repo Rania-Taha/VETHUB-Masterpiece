@@ -21,6 +21,18 @@
                                 <form action="{{ url('clinicVet') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card">
+                                        <div class="form-group col-md-8">
+                                            <label for="clinic_id">Clinic Name</label>
+                                            <select name="clinic_id" id="clinic_id" class="form-control">
+                                                <option value="">Select Clinic</option>
+                                                @foreach ($clinics as $item)
+                                                    <option value=" {{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('clinic_id')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
@@ -29,6 +41,9 @@
                                                         placeholder="Choose an image">
                                                 </div>
                                             </div>
+                                            @error('image')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="name">Name</label>
@@ -37,6 +52,9 @@
                                                 </div>
 
                                             </div>
+                                            @error('name')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="position">Position</label>
@@ -44,11 +62,14 @@
                                                         id="inputEmail4" placeholder="Position">
                                                 </div>
                                             </div>
+                                            @error('position')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             
 
 
 
-                                            <div class="card-footer">
+                                            <div>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>

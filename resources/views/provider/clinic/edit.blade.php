@@ -4,6 +4,8 @@
 @section('content')
     <!-- Main Content -->
     <div class="main-content" style="margin-left:290px ; width:75% ;margin-top:70px" >
+        
+    
         <section class="section">
             <div class="section-header">
                 <h1>My Clinic</h1>
@@ -36,7 +38,11 @@
                                                     <input type="file" name="image" value="{{ $clinic->image }}"
                                                         class="form-control" id="image" placeholder="Choose an image">
                                                 </div>
-                                            </div>
+                                            </div>  
+                                            @error('image')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                            
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="name">Name</label>
@@ -44,6 +50,9 @@
                                                         class="form-control" id="inputEmail4" placeholder="Name">
                                                 </div>
                                             </div>
+                                            @error('name')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="description"> Description</label>
@@ -52,6 +61,9 @@
 
                                                 </div>
                                             </div>
+                                            @error('description')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="about">About</label>
@@ -60,6 +72,9 @@
 
                                                 </div>
                                             </div>
+                                            @error('about')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="location">Location</label>
@@ -67,6 +82,9 @@
                                                     <textarea class="summernote-simple" name="location" id="location" placeholder="Enter a location" style="width: 700px ; height:80px">{{$clinic->location }}</textarea>
                                                 </div>
                                             </div>
+                                            @error('location')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="location_map">Location map</label>
@@ -74,6 +92,9 @@
                                                     <textarea class="summernote-simple" name="location_map" id="location_map" placeholder="Enter a location map" style="width: 700px ; height:80px">{{$clinic->location_map }}</textarea>
                                                 </div>
                                             </div>
+                                            @error('location_map')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
 
                                             <div class="card-footer">
                                                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -86,6 +86,12 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request,  $id)
     {
            
+        $request->validate([
+            'image' => ['required', 'image', 'max:4192'],
+            'name' => ['required', 'max:20'],
+            'short_description' => ['required', 'max:500'],
+            'long_description' => ['required', 'max:1000'],
+        ]);
            
             $category['name'] = $request->name;
             $category['short_description'] = $request->short_description;

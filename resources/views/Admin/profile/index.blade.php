@@ -53,7 +53,8 @@
                                     </div>
                                     @error('first_name')
                                         <span style="color: red">{{ $message }}</span>
-                                    @enderror @error('last_name')
+                                    @enderror 
+                                    @error('last_name')
                                     <span style="color: red">{{ $message }}</span>
                                 @enderror
                                 </div>
@@ -78,9 +79,7 @@
                                             placeholder="+962 7" value="{{$user->phone}}" />
                                         
                                     </div>
-                                    @error('phone')
-                                        <span style="color: red">{{ $message }}</span>
-                                    @enderror
+                                   
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating form-floating-outline mb-3">
@@ -89,9 +88,7 @@
                                             value="{{ $user->address }}" />
                 
                                     </div>
-                                    @error('address')
-                                        <span style="color: red">{{ $message }}</span>
-                                        @enderror
+                                   
                                 </div>
 
 

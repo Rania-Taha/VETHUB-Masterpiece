@@ -30,6 +30,9 @@
                                                         placeholder="Choose an image">
                                                 </div>
                                             </div>
+                                            @error('image')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="name">Name</label>
@@ -38,6 +41,9 @@
                                                 </div>
 
                                             </div>
+                                            @error('name')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="description">Description</label>
@@ -45,6 +51,9 @@
                                                     <textarea class="summernote-simple" name="description" id="description" placeholder="Enter a description" style="width: 700px ; height:80px"></textarea>
                                                 </div>
                                             </div>
+                                            @error('description')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="about">About</label>
@@ -52,6 +61,9 @@
                                                     <textarea class="summernote-simple" name="about" id="about" placeholder="Enter a about" style="width: 700px ; height:80px"></textarea>
                                                 </div>
                                             </div>
+                                            @error('about')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="location">Location</label>
@@ -59,6 +71,9 @@
                                                     <textarea class="summernote-simple" name="location" id="location" placeholder="Enter a location" style="width: 700px ; height:80px"></textarea>
                                                 </div>
                                             </div>
+                                            @error('location')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="location_map">Location map</label>
@@ -66,10 +81,12 @@
                                                     <textarea class="summernote-simple" name="location_map" id="location_map" placeholder="Enter a location map" style="width: 700px ; height:80px"></textarea>
                                                 </div>
                                             </div>
+                                            @error('location_map')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
 
 
-
-                                            <div class="card-footer">
+                                            <div>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>

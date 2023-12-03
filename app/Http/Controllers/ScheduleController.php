@@ -8,6 +8,12 @@ use App\Models\User;
 use Auth;
 use App\Http\Requests\StoreScheduleRequest;
 use App\Http\Requests\UpdateScheduleRequest;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
+
+
+
 
 class ScheduleController extends Controller
 {
@@ -22,6 +28,7 @@ class ScheduleController extends Controller
                 $id = Auth::user()->id;
                 $user = User::find($id);
                 $schedule = Schedule::with('clinic')->get();
+                // dd($schedule);
                $clinic=Clinic::all();
                return view('Admin.schedule.index', compact('schedule' , 'clinic'));
 
@@ -70,7 +77,8 @@ class ScheduleController extends Controller
 
         $schedule->save();
         
-        // toastr('Created Successfully!', 'success');
+        Session::flash('success', 'Schedule Created successfully!');
+
         return redirect('schedule');
 
     }
@@ -88,26 +96,17 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        // $schedule =  Schedule::find($id);
-        // $clinic = Clinic::all();
-        // $user= User::find($id);
-        // return view('Admin.schedule.edit', compact('schedule','user', 'clinic'));
-
-
+ 
         if (Auth::id()) {
             $role = Auth()->user()->role;
+            $user_id = Auth::user()->id;
+            $schedule = Schedule::with('clinic')->find($id);
+            $clinic = Clinic::all();
+            $user= User::find($user_id);
             if ($role == 'admin') {
-                $id = Auth::user()->id;
-                $schedule =  Schedule::find($id);
-                $clinic = Clinic::all();
-                $user= User::find($id);
-                return view('Admin.schedule.edit', compact('schedule','user', 'clinic'));
+                return view('Admin.schedule.edit', compact('schedule','user','clinic'));
 
             } elseif ($role == 'provider') {
-                $id = Auth::user()->id;
-                $schedule =  Schedule::find($id);
-                $clinic = Clinic::all();
-                $user= User::find($id);
                 return view('provider.provider_schedule.edit', compact('schedule','user', 'clinic'));
             }
         }
@@ -121,6 +120,7 @@ class ScheduleController extends Controller
     {
         $schedule['time'] = $request->time;
         $schedule['status'] = $request->status;
+        $schedule['clinic_id'] = $request->clinic_id;
         
     
         Schedule::where(['id' => $id])->update( $schedule);
@@ -132,7 +132,16 @@ class ScheduleController extends Controller
      */
     public function destroy($id)
     {
-        Schedule::destroy($id);
-        return redirect ('schedule')->with('flash_message', 'Schedule deleted!'); 
+        try {
+            Schedule::destroy($id);
+            Session::flash('success', 'Schedule deleted!');
+            return redirect('schedule');
+        } catch (\Exception $e) {
+            Log::error("Error deleting schedule: {$e->getMessage()}");
+
+            Session::flash('warning', 'You must delete bookings first before proceeding.');
+
+            return redirect('schedule');
+        }
     }
 }

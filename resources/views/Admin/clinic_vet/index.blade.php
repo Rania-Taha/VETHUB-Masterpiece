@@ -44,22 +44,23 @@
                                             <center>   <td class="sorting_1">
                                                 <center>   <div class="d-flex align-items-center">
                                                     &nbsp &nbsp  <div class="avatar avatar-sm me-3" style="margin-right: 7px">
-                                                        <img src="{{ $item->image }}" alt="Avatar" style="width: 70px ; height: 65px"
+                                                        <img src="{{ $item->image }}" alt="Avatar" style="width: 80px ; height: 77px"
                                                             class="rounded-circle"> &nbsp &nbsp
                                                     </div>
                                                     &nbsp &nbsp &nbsp
                                                     <center> <div class="d-flex flex-column ">
-                                                        <span style="font-size: 16px">&nbsp &nbsp vet name : {{ $item->name }} &nbsp &nbsp
+                                                        <ul>
+                                                       <li> <span style="font-size: 16px">&nbsp &nbsp vet name : {{ $item->name }} &nbsp &nbsp </li>
                                                             
-                                                              <br> @if ($item->clinic)
+                                                              <br>  <li>@if ($item->clinic)
                                                               &nbsp &nbsp  clinic name: {{ $item->clinic->name }}
                                                           @else
                                                               No Clinic Assigned
-                                                          @endif <br>
-                                                          &nbsp &nbsp position :  {{ $item->position }} &nbsp &nbsp</span>
+                                                          @endif </li> <br> <li>
+                                                          &nbsp &nbsp position :  {{ $item->position }} &nbsp &nbsp</span> </li>
                                                                                                                 
                                                      
-                                                    </div> </center>
+                                                    </div> </ul></center>
                                                 </div> </center>
                                             </td> </center>
                 

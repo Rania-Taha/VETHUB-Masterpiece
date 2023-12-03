@@ -29,54 +29,83 @@
                                                     <input type="file" name="image1" class="form-control" id="image1"
                                                         placeholder="Choose an image">
                                                 </div>
+                                               
                                             </div>
+                                            @error('image1')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="image2">Image 2</label>
                                                     <input type="file" name="image2" class="form-control" id="image2"
                                                         placeholder="Choose an image">
                                                 </div>
+                                              
                                             </div>
+                                            @error('image2')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                        
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="title">Title</label>
                                                     <input type="title" name="title" class="form-control"
                                                         id="inputEmail4" placeholder="Title">
                                                 </div>
+                                              
 
                                             </div>
+                                            @error('title')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="short_description">Description</label>
                                                     <br>
                                                     <textarea class="summernote-simple" name="short_description" id="short_description" placeholder="Enter a description" style="width: 700px ; height:80px"></textarea>
                                                 </div>
+                                              
                                             </div>
+                                            @error('short_description')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="section1">Section 1</label>
                                                     <br>
                                                     <textarea class="summernote-simple" name="section1" id="section1" placeholder="Enter Section 1" style="width: 700px ; height:100px"></textarea>
                                                 </div>
+                                              
                                             </div>
+                                            @error('section1')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="section2">Section 2</label>
                                                     <br>
                                                     <textarea class="summernote-simple" name="section2" id="section2" placeholder="Enter Section 2" style="width: 700px ; height:100px"></textarea>
                                                 </div>
+                                               
                                             </div>
+                                            @error('section2')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="section3">Section 3</label>
                                                     <br>
                                                     <textarea class="summernote-simple" name="section3" id="section3" placeholder="Enter Section 3" style="width: 700px ; height:100px"></textarea>
                                                 </div>
+                                                
                                             </div>
+                                            @error('section3')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
 
 
 
-                                            <div class="card-footer">
+                                            <div >
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>

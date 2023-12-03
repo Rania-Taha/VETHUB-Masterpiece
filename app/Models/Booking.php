@@ -22,11 +22,10 @@ class Booking extends Model
     }
     public function schedule()
     {
-        return $this->belongsTo(Schedule::class);
+        return $this->belongsTo(Schedule::class , 'schedule_id');
     }
     public function clinicName()
     {
-        // Assuming you have a schedule relationship and a clinic relationship in the Schedule model
         return $this->schedule->clinic->name;
     }
 }

@@ -17,7 +17,7 @@
                                 <h4>Add a Service</h4>
                             </div>
                             <div class="card-body p-0">
-                                <form action="" method="POST" enctype="multipart/form-data">
+                                <form action="{{ url('clinicService') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card">
                                         <div class="card-body">
@@ -28,6 +28,9 @@
                                                         placeholder="Choose an image">
                                                 </div>
                                             </div>
+                                            @error('image')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="service_name">Name</label>
@@ -36,6 +39,9 @@
                                                 </div>
 
                                             </div>
+                                            @error('service_name')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="description">Description</label>
@@ -44,9 +50,12 @@
                                                         style="width: 700px ; height:80px"></textarea>
                                                 </div>
                                             </div>
+                                            @error('description')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
 
 
-                                            <div class="card-footer">
+                                            <div>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>

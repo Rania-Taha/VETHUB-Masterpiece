@@ -45,6 +45,9 @@
                                                 </div>
 
                                             </div>
+                                            @error('user_id')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
 
                                             
                                             <div class="form-row">
@@ -55,6 +58,9 @@
                                                 </div>
 
                                             </div>
+                                            @error('review_text')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
 
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
@@ -64,15 +70,10 @@
                                                 </div>
 
                                             </div>
-                                            
-                                            {{-- <div class="form-row">
-                                                <div class="form-group col-md-8">
-                                                    <label for="clinic_id">Clinic Id</label>
-                                                    <input type="number" name="clinic_id" class="form-control"
-                                                        id="clinic_id" placeholder="clinic_id">
-                                                </div>
-
-                                            </div> --}}
+                                            @error('rating')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                     
 
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
@@ -86,11 +87,14 @@
                                                 </div>
 
                                             </div>
+                                            @error('clinic_id')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
                                             
                                            
 
 
-                                            <div class="card-footer">
+                                            <div >
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>
