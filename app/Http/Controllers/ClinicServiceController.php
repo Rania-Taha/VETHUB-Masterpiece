@@ -137,14 +137,19 @@ class ClinicServiceController extends Controller
             'image' => [ 'image', 'max:4192'],
             'service_name' => ['required', 'max:200'],
             'description' => ['required', 'max:500'],
-            'clinic_id' => ['required', ],
-
         ]);
 
         $clinic_service['image'] = $request->image;
         $clinic_service['service_name'] = $request->service_name;
         $clinic_service['description'] = $request->description;
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+            if ($role == 'admin') {
         $clinic_service['clinic_id'] = $request->clinic_id;
+    } elseif ($role == 'provider') {
+        $roleProvider = Auth()->user()->clinic_id;
+        $clinic_service['clinic_id'] = $roleProvider;
+    }}
 
         $filename = '';
 
@@ -160,6 +165,8 @@ class ClinicServiceController extends Controller
 
         return redirect('clinicService');
     }
+
+
     /**
      * Remove the specified resource from storage.
      */

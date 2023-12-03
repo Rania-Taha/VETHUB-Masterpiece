@@ -35,19 +35,28 @@
                                                     <input type="file" name="image" class="form-control" id="image" placeholder="Choose an image">
                                                 </div>
                                             </div>
+                                            @error('image')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="service_name">Name</label>
                                                     <input type="text" name="service_name" value="{{ $clinic_service->service_name }}" class="form-control" id="service_name" placeholder="Name">
                                                 </div>
                                             </div>
+                                            @error('service_name')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
                                                     <label for="description"> Description</label>
                                                     <textarea class="summernote-simple" name="description" id="description" placeholder="Enter a description" style="width: 700px; height: 80px">{{ $clinic_service->description }}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="card-footer">
+                                            @error('description')
+                                                <div class="text-danger small">{{ $message }}</div>
+                                            @enderror
+                                            <div>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>

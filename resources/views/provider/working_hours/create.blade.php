@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('provider.layouts.master')
 
 @section('content')
     <!-- Main Content -->
@@ -22,18 +22,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="form-row">
-                                                <div class="form-group col-md-5">
-                                                    <label for="clinic_id">Clinic Name</label>
-                                                    <select name="clinic_id" id="clinic_id" class="form-control">
-                                                        <option value="">Select Clinic</option>
-                                                        @foreach ($clinic as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('clinic_id')
-                                                        <div class="text-danger small">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
+
 
                                                 <div class="form-group col-md-5">
                                                     <label for="day">Day</label>

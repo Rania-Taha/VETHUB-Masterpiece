@@ -18,26 +18,19 @@ class WorkingHoursController extends Controller
      */
     public function index()
     {  
-        
-
         if (Auth::id()) {
             $role = Auth()->user()->role;
             if ($role == 'admin') {
                 $id = Auth::user()->id;
-                $user = User::find($id);
                 $working_hours = Working_hours::with('clinic')->get();
                 $clinic=Clinic::all();
                 return view('Admin.working_hours.index', compact('working_hours' , 'clinic', 'user'));
             } elseif ($role == 'provider') {
-                $id = Auth::user()->id;
-                $user = User::find($id);
-                $clinicuser = $user->clinic_id;
-                $clinic=Clinic::all();
+                $clinicuser = Auth::user()->clinic_id;
                 $working_hours = Working_hours::where('clinic_id', $clinicuser)->get();
-                return view('provider.working_hours.index', compact('working_hours' , 'clinic'));
+                return view('provider.working_hours.index', compact('working_hours'));
             }
         }
-
     }
 
     /**
@@ -45,11 +38,16 @@ class WorkingHoursController extends Controller
      */
     public function create()
     {
-                $clinic = Clinic::all();
-                $user= User::find(1);
-                return view('Admin.working_hours.create', compact('user', 'clinic'));
+        $clinic=Clinic::all();
 
-    }
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+        if ($role == 'admin') {
+                return view('Admin.working_hours.create', compact( 'clinic'));
+            } elseif ($role == 'provider') {
+                return view('provider.working_hours.create', compact( 'clinic'));
+        
+            }} }
 
     /**
      * Store a newly created resource in storage.
@@ -57,12 +55,8 @@ class WorkingHoursController extends Controller
     public function store(StoreWorking_hoursRequest $request)
     {
         $request->validate([
-           
-            'day' => ['required', 'max:20'],
             'start_at' => ['required', 'max:20'],
             'ends_at' => ['required', 'max:20'],
-            'clinic_id' => ['required'],
-
         ]);
 
        
@@ -70,10 +64,17 @@ class WorkingHoursController extends Controller
 
        
         $working_hours->day = $request->day;
-        $working_hours->clinic_id = $request->clinic_id;
         $working_hours->start_at = $request->start_at;
         $working_hours->ends_at = $request->ends_at;
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+            if ($role == 'admin') {
+                $working_hours->clinic_id = $request->clinic_id;
+            } elseif ($role == 'provider') {
+        $roleProvider = Auth()->user()->clinic_id;
+        $working_hours->clinic_id = $roleProvider;
 
+    }}
         $working_hours->save();
         
         Session::flash('success', 'Created successfully!');
@@ -96,17 +97,13 @@ class WorkingHoursController extends Controller
  
         if (Auth::id()) {
             $role = Auth()->user()->role;
+            $user_id = Auth::user()->id;
+            $working_hours =  Working_hours::find($id);
+            $clinic = Clinic::all();
+            $user= User::find($user_id);
             if ($role == 'admin') {
-                $id = Auth::user()->id;
-                $working_hours =  Working_hours::find($id);
-                $clinic = Clinic::all();
-                $user= User::find($id);
                 return view('Admin.working_hours.edit', compact('working_hours','user', 'clinic'));
             } elseif ($role == 'provider') {
-                $id = Auth::user()->id;
-                $working_hours =  Working_hours::find($id);
-                $clinic = Clinic::all();
-                $user= User::find($id);
                 return view('provider.working_hours.edit', compact('working_hours','user', 'clinic'));
             }
         }
@@ -115,6 +112,10 @@ class WorkingHoursController extends Controller
 
     public function update(UpdateWorking_hoursRequest $request, $id)
     {
+        $request->validate([
+            'start_at' => ['required', 'max:20'],
+            'ends_at' => ['required', 'max:20'],
+        ]);
         // Find the specific working_hours record by its ID
         $working_hours = Working_hours::find($id);
     
@@ -127,8 +128,15 @@ class WorkingHoursController extends Controller
         $working_hours->day = $request->day;
         $working_hours->start_at = $request->start_at;
         $working_hours->ends_at = $request->ends_at;
-        $working_hours->clinic_id = $request->clinic_id;
-    
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+            if ($role == 'admin') {
+                $working_hours->clinic_id = $request->clinic_id;
+            } elseif ($role == 'provider') {
+        $roleProvider = Auth()->user()->clinic_id;
+        $working_hours->clinic_id = $roleProvider;
+
+    }}    
         // Save the updated record
         $working_hours->save();
     
