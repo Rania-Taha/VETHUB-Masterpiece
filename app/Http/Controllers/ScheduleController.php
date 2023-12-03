@@ -48,9 +48,17 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        $clinic = Clinic::all();
-        $user= User::find(1);
-        return view('Admin.schedule.create', compact('user', 'clinic'));
+
+        $clinic=Clinic::all();
+
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+        if ($role == 'admin') {
+                return view('Admin.schedule.create', compact( 'clinic'));
+            } elseif ($role == 'provider') {
+                return view('provider.provider_schedule.create', compact( 'clinic'));
+        
+            }}
     }
 
     /**
@@ -60,10 +68,8 @@ class ScheduleController extends Controller
     {
         
         $request->validate([
-           
             'time' => ['required', 'max:20'],
             'status' => ['required'],
-           
         ]);
 
        
@@ -72,8 +78,15 @@ class ScheduleController extends Controller
        
         $schedule->time = $request->time;
         $schedule->status = $request->status;
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+            if ($role == 'admin') {
         $schedule->clinic_id = $request->clinic_id;
-       
+    } elseif ($role == 'provider') {
+        $roleProvider = Auth()->user()->clinic_id;
+        $schedule->clinic_id = $roleProvider;
+
+    }}       
 
         $schedule->save();
         
@@ -97,20 +110,37 @@ class ScheduleController extends Controller
     public function edit($id)
     {
  
-        if (Auth::id()) {
-            $role = Auth()->user()->role;
-            $user_id = Auth::user()->id;
-            $schedule = Schedule::with('clinic')->find($id);
-            $clinic = Clinic::all();
-            $user= User::find($user_id);
-            if ($role == 'admin') {
-                return view('Admin.schedule.edit', compact('schedule','user','clinic'));
+        // if (Auth::id()) {
+        //     $role = Auth()->user()->role;
+        //     $user_id = Auth::user()->id;
+        //     $schedule = Schedule::with('clinic')->find($id);
+        //     $clinic = Clinic::all();
+        //     $user= User::find($user_id);
+        //     if ($role == 'admin') {
+        //         return view('Admin.schedule.edit', compact('schedule','user','clinic'));
 
+        //     } elseif ($role == 'provider') {
+        //         return view('provider.provider_schedule.edit', compact('schedule','user', 'clinic'));
+        //     }
+        // }
+
+        $schedule = Schedule::find($id); 
+        $clinic = Clinic::all();
+
+        if (Auth::check()) { 
+            $role = Auth()->user()->role;
+            if ($role == 'admin') {
+                return view('Admin.schedule.edit', compact( 'clinic' , 'schedule'));
+    
             } elseif ($role == 'provider') {
-                return view('provider.provider_schedule.edit', compact('schedule','user', 'clinic'));
+    
+                return view('provider.provider_schedule.edit', compact( 'clinic' , 'schedule'));
+    
+    
             }
         }
-    }
+}
+    
     
 
     /**
@@ -120,8 +150,14 @@ class ScheduleController extends Controller
     {
         $schedule['time'] = $request->time;
         $schedule['status'] = $request->status;
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+            if ($role == 'admin') {
         $schedule['clinic_id'] = $request->clinic_id;
-        
+    } elseif ($role == 'provider') {
+        $roleProvider = Auth()->user()->clinic_id;
+        $schedule['clinic_id'] = $roleProvider;
+    }}        
     
         Schedule::where(['id' => $id])->update( $schedule);
        return redirect('schedule')->with('flash_message', 'Schedule Updated!'); 

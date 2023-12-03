@@ -12,6 +12,8 @@ use App\Models\User;
 use App\Models\Booking;
 use App\Models\Review;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Session;
+
 
 
 
@@ -66,9 +68,8 @@ class ProfileController extends Controller
         $user = User::find(Auth::id());
         $bookings = Booking::where('user_id', $id)->get();
 
-        // $book=Booking::where(['id' => $id])->update($data);
-        // return Redirect::route('frontend.profile.profile')
-        Alert::success('Success', 'profile-updated!');
+        Session::flash('success', 'profile-updated!');
+
 
         return back()->with(compact('user', 'bookings'));
     }

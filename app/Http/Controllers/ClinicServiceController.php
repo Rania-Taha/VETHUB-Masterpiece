@@ -103,23 +103,18 @@ class ClinicServiceController extends Controller
 
     $clinics = Clinic :: all();
 
-    // Check if the clinic service with the provided ID is not found.
     if (!$clinic_service) {
-        // Handle the case where the clinic service with the provided ID is not found.
-        // You can redirect to an error page or return an error message.
-        // For example, you can return a 404 error view:
+
         return view('errors.404');
     }
 
-    // Continue with your role-based logic to determine which view to return.
-    if (Auth::check()) { // Use Auth::check() to check if a user is authenticated
+    if (Auth::check()) { 
         $role = Auth()->user()->role;
         if ($role == 'admin') {
             return view('Admin.clinic_service.edit', compact( 'clinics' , 'clinic_service'));
 
         } elseif ($role == 'provider') {
-            // Your provider logic here.
-            // You can return a different view for providers or handle their logic here.
+
             return view('provider.provider_clinic_service.edit', compact( 'clinics' , 'clinic_service'));
 
 

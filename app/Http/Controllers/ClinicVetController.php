@@ -48,10 +48,16 @@ class ClinicVetController extends Controller
      */
     public function create()
     {
-        $clinics = Clinic :: all();
+        $clinics=Clinic::all();
 
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+        if ($role == 'admin') {
         return view('Admin.clinic_vet.create', compact( 'clinics'));
+    } elseif ($role == 'provider') {
+        return view('provider.provider_clinic_vet.create', compact( 'clinics'));
 
+    }}
     }
 
     /**
@@ -63,7 +69,6 @@ class ClinicVetController extends Controller
             'image' => ['required', 'image', 'max:4192'],
             'name' => ['required', 'max:100'],
             'position' => ['required', 'max:500'],
-            'clinic_id'=> ['required'],
         ]);
 
        
@@ -74,8 +79,15 @@ class ClinicVetController extends Controller
         $clinic_vet->image =  $imagePath;
         $clinic_vet->name = $request->name;
         $clinic_vet->position = htmlspecialchars($request->position);
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+            if ($role == 'admin') {
         $clinic_vet->clinic_id = $request->clinic_id;
+    } elseif ($role == 'provider') {
+        $roleProvider = Auth()->user()->clinic_id;
+        $clinic_vet->clinic_id = $roleProvider;
 
+    }}
         $clinic_vet->save();
         
        
@@ -97,25 +109,22 @@ class ClinicVetController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::id()) {
-            $role = Auth()->user()->role;
-            if ($role == 'admin') {
-                $clinic_vet = Clinic_vet::find($id); 
+
+        $clinic_vet = Clinic_vet::find($id); 
                 $clinics = Clinic :: all();
 
-                return view('Admin.clinic_vet.edit', compact( 'clinics' , 'clinic_vet'));
-
-            } elseif ($role == 'provider') {
-                $id = Auth::user()->id;
-                $user = User::find($id);
-                $clinicuser = $user->clinic_id;
-                $clinic_vet = Clinic_vet::where('clinic_id', $clinicuser)->first();
-                $clinics = Clinic :: all();
-
-                return view('provider.provider_clinic_vet.edit', compact( 'clinics' , 'clinic_vet'));
-
-            }
-        }
+                if (Auth::check()) { 
+                    $role = Auth()->user()->role;
+                    if ($role == 'admin') {
+                        return view('Admin.clinic_vet.edit', compact( 'clinics' , 'clinic_vet'));
+            
+                    } elseif ($role == 'provider') {
+            
+                        return view('provider.provider_clinic_vet.edit', compact( 'clinics' , 'clinic_vet'));
+            
+            
+                    }
+                }
     }
 
     /**
@@ -124,17 +133,23 @@ class ClinicVetController extends Controller
     public function update(UpdateClinic_vetRequest $request, $id)
     {
         $request->validate([
-            'image' => ['required', 'image', 'max:4192'],
+            'image' => [ 'image', 'max:4192'],
             'name' => ['required', 'max:100'],
             'position' => ['required', 'max:500'],
-            'clinic_id'=> ['required'],
         ]);
 
         $clinic_vet['name'] = $request->name;
         $clinic_vet['position'] = $request->position;
-        $clinic_vet['clinic_id'] = $request->clinic_id;
         $clinic_vet['image'] = $request->image;
 
+        if (Auth::id()) {
+            $role = Auth()->user()->role;
+            if ($role == 'admin') {
+        $clinic_vet['clinic_id'] = $request->clinic_id;
+    } elseif ($role == 'provider') {
+        $roleProvider = Auth()->user()->clinic_id;
+        $clinic_vet['clinic_id'] = $roleProvider;
+    }}
 
 
         $filename = '';
