@@ -39,7 +39,9 @@
                         <span class="fa fa-paper-plane"></span>
                     </div>
                     <div class="text">
-                        <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@example.com</a></p>
+                        <p><span>Email:</span> <a href="mailto:info@yoursite.com">vethub@gmail.com
+
+                            </a></p>
                     </div>
                 </div>
             </div>
@@ -48,14 +50,15 @@
 
         <br>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="contact">
             <div class="col-12 col-sm-8 mb-5">
                 <div class="contact-form">
                     <div id="success"></div>
-                    <form action="{{ route('contact.store') }}" method="POST" name="sentMessage" id="contactForm" novalidate="novalidate">
+                    <form action="{{ route('contact.store') }}" method="POST" name="sentMessage" id="contactForm"
+                        novalidate="novalidate">
 
-@csrf                      
-  <center>
+                        @csrf
+                        <center>
                             <h4 class="text-primary mb-3">Send us a Message</h4>
                         </center>
                         <br>

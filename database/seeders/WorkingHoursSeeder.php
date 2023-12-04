@@ -86,6 +86,45 @@ class WorkingHoursSeeder extends Seeder
             'ends_at' =>'08:00pm',
             'clinic_id' => '2',
         ]);
+        DB::table('working_hours')->insert([
+            'day' => 'Saturday',
+            'start_at' => '10:00am ',
+            'ends_at' =>'08:00pm',
+            'clinic_id' => '3',
+        ]);
+        DB::table('working_hours')->insert([
+            'day' => 'Sunday',
+            'start_at' => '10:00am ',
+            'ends_at' =>'08:00pm',
+            'clinic_id' => '3',
+        ]);
+        DB::table('working_hours')->insert([
+            'day' => 'Monday',
+            'start_at' => '10:00am ',
+            'ends_at' =>'08:00pm',
+            'clinic_id' => '3',
+        ]);
+        DB::table('working_hours')->insert([
+            'day' => 'Tuesday',
+            'start_at' => '10:00am ',
+            'ends_at' =>'08:00pm',
+            'clinic_id' => '3',
+        ]);DB::table('working_hours')->insert([
+            'day' => 'Wednesday',
+            'start_at' => '10:00am ',
+            'ends_at' =>'08:00pm',
+            'clinic_id' => '3',
+        ]);DB::table('working_hours')->insert([
+            'day' => 'Thursday',
+            'start_at' => '10:00am ',
+            'ends_at' =>'08:00pm',
+            'clinic_id' => '3',
+        ]);DB::table('working_hours')->insert([
+            'day' => 'Friday',
+            'start_at' => '02:00pc ',
+            'ends_at' =>'08:00pm',
+            'clinic_id' => '3',
+        ]);
 
     }
 }

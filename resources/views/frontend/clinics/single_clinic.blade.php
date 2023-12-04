@@ -22,7 +22,6 @@
                             <div class="working-hours">
                                 <h5 class="mb-3 text-success">Working hours</h5>
                                 <table class="table table-sm">
-                                    {{-- {{ dd($work_hour) }} --}}
                                     @foreach ($work_hour as $item)
                                         <tr>
                                             <td>{{ $item->day }}</td>
@@ -38,10 +37,8 @@
                         <div class="row px-5">
                             <div class="col-12 p-3">
                                 <img class="img-fluid w-100" src="{{ asset($all_clinics->image) }}" alt="">
-                                {{-- <img src="{{ asset($item->image) }}" class="card-img-top" alt="Clinic Image" >  --}}
                                 <center style="font-size: 40px; margin-top: 15px;">
-                                    {{-- <a href="https://www.facebook.com/Treatypet/" class="social"><i class="bi bi-facebook fs-3"></i></a>
-                                    <a href="#" class="social"><i class="bi bi-instagram fs-3"></i></a> --}}
+                           
 
                                     <a href="#book" class="btn  btn-lg btn-primary mt-3 mt-md-4 px-4 ">Book Now</a>
                                 </center>
@@ -174,42 +171,8 @@
 
                     </div>
 
-                    <div class="col-lg-6 py-5 py-lg-0 px-3 px-lg-5">
+                    <div class="col-lg-6 py-5 py-lg-0 px-3 px-lg-5" id="book">
                         <h1 class="display-4 mb-4">Book For <span class="text-primary">Your Pet</span></h1>
-                        {{-- <div class="row py-2">
-                            <div class="col-sm-6">
-                                <div class="d-flex flex-column">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <h1 class="flaticon-house font-weight-normal text-secondary m-0 mr-3"></h1>
-                                        <h5 class="text-truncate m-0">Pet Syrgery</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="d-flex flex-column">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <h1 class="flaticon-food font-weight-normal text-secondary m-0 mr-3"></h1>
-                                        <h5 class="text-truncate m-0">Pet Feeding</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="d-flex flex-column">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <h1 class="flaticon-grooming font-weight-normal text-secondary m-0 mr-3"></h1>
-                                        <h5 class="text-truncate m-0">Pet Grooming</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="d-flex flex-column">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <h1 class="flaticon-toy font-weight-normal text-secondary m-0 mr-3"></h1>
-                                        <h5 class="text-truncate m-0">Pet Training</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         <br>
                         <p style="font-size: 21px; color:black"> To secure your appointment, a <span style="font-size: 22px; font-weight: bold;">2 JOD</span> booking fee is required, which will be deducted from your total bill at the clinic. Thank you for choosing us!</p>
 <br>

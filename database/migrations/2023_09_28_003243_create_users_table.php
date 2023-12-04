@@ -19,13 +19,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('password'); // Use Laravel's password hashing
+            $table->string('password')->nullable(); // Use Laravel's password hashing
             $table->timestamp('email_verified_at')->nullable();           
             $table->enum('role', ['admin','user','provider'])->default('user');
             $table->unsignedBigInteger('clinic_id')->nullable();
             $table->timestamps();
             $table->rememberToken();
             $table->foreign('clinic_id')->references('id')->on('clinics');
+            $table->string('google_id')->nullable();
+
         });
     }
 

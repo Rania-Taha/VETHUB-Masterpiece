@@ -293,7 +293,8 @@
                 <h1>Sign in</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="social"><i class="bi bi-google"></i></a>
+                    <a href="{{ route('google-auth') }}
+                    " class="social"><i class="bi bi-google"></i></a>
                     <a href="#" class="social"><i class="bi bi-linkedin"></i></a>
                 </div>
                 <span>or use your account</span>

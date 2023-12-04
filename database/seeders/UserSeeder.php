@@ -37,6 +37,8 @@ class UserSeeder extends Seeder
                 'clinic_id' => '1',
             ]
         ]);
+
+        
         DB::table('users')->insert([
             [
                 'first_name' => 'Rania',             
@@ -47,6 +49,47 @@ class UserSeeder extends Seeder
                 'role' => 'user'
             ]
         ]);
+        DB::table('users')->insert([
+            [
+                'first_name' => 'Razan',             
+                'last_name' => 'Rjoub',
+                'email' => 'razan_rjoub1@gmail.com',
+                'password' => Hash::make('RBt-12345'),
+                'image' => 'assets\img\razan.jpg',
+                'role' => 'user'
+            ]
+        ]);
+        DB::table('users')->insert([
+            [
+                'first_name' => 'Rama',             
+                'last_name' => 'Ababneh',
+                'email' => 'ababneh.rama@gmail.com',
+                'password' => Hash::make('RBt-12345'),
+                'image' => 'assets\img\rama.jpg',
+                'role' => 'user'
+            ]
+        ]);
+        DB::table('users')->insert([
+            [
+                'first_name' => 'Leena',             
+                'last_name' => 'Rababah',
+                'email' => 'leena_ababneh@gmail.com',
+                'password' => Hash::make('RBt-12345'),
+                'image' => 'assets\img\leena.png',
+                'role' => 'user'
+            ]
+        ]);
+        DB::table('users')->insert([
+            [
+                'first_name' => 'Lama',             
+                'last_name' => 'Nazzal',
+                'email' => 'lama.nazzal@gmail.com',
+                'password' => Hash::make('RBt-12345'),
+                'image' => 'assets\img\lama1.jpg',
+                'role' => 'user'
+            ]
+        ]);
+
     }
 }
 

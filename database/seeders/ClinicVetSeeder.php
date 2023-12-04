@@ -38,5 +38,29 @@ class ClinicVetSeeder extends Seeder
             'image' => 'http://127.0.0.1:8000/assets/img/mohammad.jpg',
             'clinic_id' => '1',
         ]);
+        DB::table('clinic_vets')->insert([
+            'name' => 'Dr. Abdallah Salah',
+            'position' => 'Veterinarian',
+            'image' => 'http://127.0.0.1:8000/assets/img/moh.jpg',
+            'clinic_id' => '1',
+        ]);
+        DB::table('clinic_vets')->insert([
+            'name' => 'Raghad Alomari',
+            'position' => 'Veterinarian',
+            'image' => 'http://127.0.0.1:8000/assets/img/raghad.jpg',
+            'clinic_id' => '1',
+        ]);
+        DB::table('clinic_vets')->insert([
+            'name' => 'Dr. Saba Rihani',
+            'position' => 'Veterinarian',
+            'image' => 'http://127.0.0.1:8000/assets/img/dr.saba.jpg',
+            'clinic_id' => '3',
+        ]);
+        DB::table('clinic_vets')->insert([
+            'name' => 'Raghad Alomari',
+            'position' => 'Veterinarian',
+            'image' => 'http://127.0.0.1:8000/assets/img/raghad.jpg',
+            'clinic_id' => '3',
+        ]);
     }
 }

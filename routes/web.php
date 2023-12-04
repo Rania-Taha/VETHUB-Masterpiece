@@ -15,6 +15,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ContactUsController;
 
 
@@ -133,3 +134,7 @@ Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews
 //PAYPAL
 Route::get('paypal/success', [BookingController::class, 'success'])->name('paypal_success');
 Route::get('paypal/cancel', [BookingController::class, 'cancel'])->name('paypal_cancel');
+
+
+Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [GoogleController::class, 'callbackGoogle']);

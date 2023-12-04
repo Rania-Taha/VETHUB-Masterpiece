@@ -18,8 +18,8 @@
                                 Help is just a click away,
                                 Free live chat for instant advice
                             </h5>
-                            <a href="clinic_" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Book Now</a>
-                            <a href="about" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a>
+                            <a href="/clinic_" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Book Now</a>
+                            <a href="/about" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -36,8 +36,8 @@
                             <h5 class="text-white mb-3 d-none d-sm-block">
                                 Because Your Pet Deserves the best Check Out Our Services
                             </h5>
-                            <a href="clinic_" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Book Now</a>
-                            <a href="service.html" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a>
+                            <a href="/blog_website" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Read More</a>
+                            {{-- <a href="/about" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a> --}}
                         </div>
                     </div>
                 </div>
@@ -56,8 +56,8 @@
                             <h5 class="text-white mb-3 d-none d-sm-block">
                                 Highest Quality Care For Pets You'll Love
                             </h5>
-                            <a href="clinic_" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Book Now</a>
-                            <a href="service.html" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a>
+                            <a href="/clinic_" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Book Now</a>
+                            <a href="/about" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -89,64 +89,6 @@
     @include('frontend.home.sections.book')
     {{-- End Booking --}}
 
-
-    <!-- About Start -->
-    {{-- <div class="container py-5">
-        <div class="row py-5 aboutusindex">
-            <div class="col-lg-7 pb-5 pb-lg-0 px-3 px-lg-5">
-                <h4 class="text-secondary mb-3">About Us</h4>
-                <h4 class="text-muted mb-3">
-                    <span class="text-primary">We are here to help you and your pet.</span>
-                </h4>
-                <p class="mb-1" style="font-size: 18px">
-                    We are pet lovers first, and vet services provider second. Our
-                    passion for exceptional pet care and customer service is fueled by
-                    our respect for the human-animal bond.
-                </p>
-                <br>
-                <ul class="list-inline">
-                    <li>
-                        <h5>
-                            <i class="fa fa-check-double text-secondary mr-3"></i> Flexible
-                            Options
-                        </h5>
-                    </li>
-                    <li>
-                        <h5>
-                            <i class="fa fa-check-double text-secondary mr-3"></i>Emergency
-                            Services
-                        </h5>
-                    </li>
-                    <li>
-                        <h5>
-                            <i class="fa fa-check-double text-secondary mr-3"></i>Client
-                            Support
-                        </h5>
-                    </li>
-                    <li>
-                        <h5>
-                            <i class="fa fa-check-double text-secondary mr-3"></i>Personalized Care
-                        </h5>
-                    </li>
-                </ul>
-                <a href="about.html" class="btn btn-lg btn-primary mt-3 px-4">Learn More</a>
-            </div>
-            <div class="col-lg-5">
-                <div class="row px-3">
-                    <div class="col-12 p-0">
-                        <img class="img-fluid w-100 mt-5" src="frontend/images/home/about-1.jpg" alt=""
-                            style="width: auto; height: 320px" />
-                    </div>
-                    <!-- <div class="col-6 p-0">
-                        <img class="img-fluid w-100" src="img/about-2.jpg" alt="">
-                    </div>
-                    <div class="col-6 p-0">
-                        <img class="img-fluid w-100" src="img/about-3.jpg" alt="">
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    </div> --}}
 <br>
 <br>
     <div class="container py-5" style="background-color: #ffffff;">
@@ -221,13 +163,13 @@
             <div class="col-md-12">
                 <h2 class="mb-4">Grow Your Clinic with Us!</h2>
                 <p class="lead mb-4" style="color: black;">Join our network of veterinary clinics and expand your reach. Partner with us to provide exceptional pet care services.</p>
-                <a href="/about" class="btn btn-lg btn-primary mt-4 px-4">Join Now</a>
+                <a href="/contact" class="btn btn-lg btn-primary mt-4 px-4">Join Now</a>
             </div>
         </div>
     </div>
     <!-- Moving paw icons -->
     <i class="fas fa-paw moving-paw" style="position: absolute; font-size: 20px; color: #000000; top: -10px; left: -10px; animation: movePaws1 1s infinite;"></i>
-    {{-- <i class="fas fa-paw moving-paw" style="position: absolute; font-size: 20px; color: #000000; top: -10px; right: -10px; animation: movePaws2 1s infinite;"></i> --}}
+    <i class="fas fa-paw moving-paw" style="position: absolute; font-size: 20px; color: #000000; top: -10px; right: -10px; animation: movePaws2 1s infinite;"></i>
 
 </div>
 

@@ -61,5 +61,17 @@ class ClinicServiceSeeder extends Seeder
             'description' =>'Our trained professionals provide grooming services that typically include bathing, brushing, trimming, and nail clipping for your pets. .',
             'clinic_id' =>'2',
         ]);
+        DB::table('clinic_services')->insert([
+            'service_name' => 'Pet Grooming',
+            'image' => 'https://th.bing.com/th/id/OIP.ieJBHp4L4HM88nuND-5GEAAAAA?pid=ImgDet&rs=1',
+            'description' =>'Our trained professionals provide grooming services that typically include bathing, brushing, trimming, and nail clipping for your pets. .',
+            'clinic_id' =>'3',
+        ]);
+        DB::table('clinic_services')->insert([
+            'service_name' => 'Pet Grooming',
+            'image' => 'https://th.bing.com/th/id/OIP.ieJBHp4L4HM88nuND-5GEAAAAA?pid=ImgDet&rs=1',
+            'description' =>'Our trained professionals provide grooming services that typically include bathing, brushing, trimming, and nail clipping for your pets.  .',
+            'clinic_id' =>'3',
+        ]);
     }
 }

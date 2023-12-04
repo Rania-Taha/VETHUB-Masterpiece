@@ -4,9 +4,9 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5">
-                <div class="bg-primary py-5 px-4 px-sm-5">
+                <div >
                    
-                    <img src="{{ asset('assets/img/book.png') }}"  alt="Check Image" width="100%" height="400">
+                    <img src="{{ asset('assets/img/book.png') }}"  alt="Check Image" width="100%" height="350">
                 </div>
             </div>
             <div class="col-lg-7 py-5 py-lg-0 px-3 px-lg-5">
