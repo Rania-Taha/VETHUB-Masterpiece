@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactUs;
-use App\Http\Requests\StoreContactUsRequest;
-use App\Http\Requests\UpdateContactUsRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
+
+
 
 class ContactUsController extends Controller
 {
@@ -13,7 +16,8 @@ class ContactUsController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.contact.index');
+
     }
 
     /**
@@ -27,9 +31,20 @@ class ContactUsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreContactUsRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required'
+        ]);
+
+        ContactUs::create($request->all());
+
+        Alert::success('Success', 'Your Message was Sent Successfully! will reply to you as soon as possible');
+
+        return redirect()->route('contact');
     }
 
     /**

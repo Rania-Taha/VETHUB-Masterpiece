@@ -15,6 +15,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactUsController;
+
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HelloMail;
@@ -79,6 +81,9 @@ Route::post('/editprofile', [AdminProfileController::class, 'edit'])->name('edit
 
 Route::get('/clinicService/create1', [ClinicServiceController::class, 'create1'])->name('clinicService.create');
 
+
+
+Route::resource('contact', ContactUsController::class);
 
 
 // ------------------ PAGES -------------------//
